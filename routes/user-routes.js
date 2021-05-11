@@ -18,6 +18,7 @@ router.post("/api/createUser", async (req, res) => {
   }
 });
 
+
 router.post("/login", async (req, res) => {
   const data = db.User.findOne({
     where: {
