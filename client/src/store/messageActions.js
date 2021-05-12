@@ -5,12 +5,12 @@ const slice = createSlice({
     name: "Message",
     initialState: {
         Username: "",
-        Friends: [],
+        Participents: [],
 
     },
     reducers: {
-        setMessage: ("Message", action) => {
-            console.log("laskdjf")
+        setMessage: (Message, action) => {
+            Message.Participents.push("scram")
         }
     }
 
@@ -18,3 +18,7 @@ const slice = createSlice({
 
 export const {setMessage} = slice.actions
 export default slice.reducer
+
+import {createSlice} from "@reduxjs/toolkit"
+import {apiCallBegan} from "./apiActionCreators"
+

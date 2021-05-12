@@ -2,7 +2,7 @@ const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require("jsonwebtoken");
-const db = require("./models");
+const db = require("../models");
 
 router.post("/api/createUser", async (req, res) => {
   const hashPass = bcrypt.hashSync(req.body.password, saltRounds);
