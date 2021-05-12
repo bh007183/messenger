@@ -28,7 +28,7 @@ export const createAccountAPI = (user) => apiCallBegan({
     url: "http://localhost:8080/api/createUser",
     data: user,
     method: "POST",
-    onSucess: setSuccess.type,
+    onSucess: setSuccess,
     onError: setError.type,
 
 

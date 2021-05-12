@@ -11,8 +11,8 @@ router.post("/api/createUser", async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       password: hashPass,
-    }).catch(err => res.status(404).json(err).end());
-    res.status(200).json(data.username);
+    }).catch(err => res.status(409).json(err).end());
+    await res.status(200).json(data.username);
     
   
 });
