@@ -19,29 +19,39 @@ router.post("/api/createUser", async (req, res) => {
 
 
 router.post("/login", async (req, res) => {
-  const data = db.User.findOne({
+  const data = await db.User.findOne({
     where: {
       username: req.body.username,
     },
   }).catch((err) => res.status(409).send(err));
-  if (bcrypt.compareSync(req.body.password, data.password) === true) {
-    jwt.sign(
-      {
-        username: data.username,
-        id: data.id,
-      },
-      process.env.JWS_TOKEN,
-      { expiresIn: "1hr" },
-      (err, token) => {
-        if (err) {
-          res.status(401).send("Error connecting token");
+
+  const match = await bcrypt.compareSync(req.body.password, data.password)
+
+    if(match){
+      jwt.sign(
+        {
+          username: data.username,
+          id: data.id,
+        },
+        process.env.JWS_TOKEN,
+        { expiresIn: "1hr" },
+        (err, token) => {
+          if (err) {
+            
+            res.status(401).send("Error connecting token");
+            
+          }
+          console.log(token)
+          res.json({ token, user: data.username, id: data.id });
         }
-        res.json({ token, user: data.username, id: data.id });
-      }
-    );
-  } else {
-    res.status(401).send("No such user!");
-  }
+      )
+
+    }else{
+      res.status(401).send("No Such User!")
+    }
+
+   
+  
 });
 
 module.exports = router;

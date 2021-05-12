@@ -13,6 +13,8 @@ try{
         url,
         method,
         data,
+        onSuccess,
+        onError
         
        
 

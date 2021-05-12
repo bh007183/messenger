@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import "./style.css";
 import {Link} from "react-router-dom"
+import {useDispatch} from "react-redux"
+import {loginAccount} from "../store/userActions"
 
 export default function Login() {
+  const dispatch = useDispatch()
   const [Login, setLogin] = useState({
     username: "",
     password: "",
@@ -12,15 +15,24 @@ export default function Login() {
   const handleChange = (event) => {
     let name = event.target.name;
     let value = event.target.value;
+
+console.log(event.target.name)
     setLogin({
       ...Login,
       [name]: value,
     });
   };
 
+  const handelSubmit = (event) => {
+      event.preventDefault()
+      dispatch(loginAccount(Login))
+
+
+  }
+
   return (
     <>
-      <form className="formContainer">
+      <form onSubmit={handelSubmit} className="formContainer">
         <br></br>
         <br></br>
         <div className="inputContainer">
@@ -44,7 +56,7 @@ export default function Login() {
         <br></br>
         <br></br>
         <div className="inputContainer">
-          <button>Login</button>
+          <button type="submit">Login</button>
         </div>
         <br></br>
         <br></br>

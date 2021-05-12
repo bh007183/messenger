@@ -4,6 +4,6 @@ import {api} from "./apiMiddleWare/api"
 export default function(){
     return configureStore({
         reducer,
-        middleware:[...getDefaultMiddleware(), api]
+        middleware:[...getDefaultMiddleware({serializableCheck: false,}), api]
     })
 }
