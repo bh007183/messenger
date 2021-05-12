@@ -19,6 +19,4 @@ const slice = createSlice({
 export const {setMessage} = slice.actions
 export default slice.reducer
 
-import {createSlice} from "@reduxjs/toolkit"
-import {apiCallBegan} from "./apiActionCreators"
 

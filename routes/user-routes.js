@@ -6,16 +6,15 @@ const db = require("../models");
 
 router.post("/api/createUser", async (req, res) => {
   const hashPass = bcrypt.hashSync(req.body.password, saltRounds);
-  try {
-    const data = db.User.create({
+ 
+    const data =  await db.User.create({
       username: req.body.username,
       email: req.body.email,
       password: hashPass,
-    });
+    }).catch(err => res.status(404).json(err).end());
     res.status(200).json(data.username);
-  } catch (err) {
-    res.status(409).json(err);
-  }
+    
+  
 });
 
 

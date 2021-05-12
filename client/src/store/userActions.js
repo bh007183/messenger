@@ -6,16 +6,30 @@ const slice = createSlice({
     initialState: {
         Username: "",
         Friends: [],
+        Success: "",
+        Error: ""
 
     },
     reducers: {
-        setUser: (User, action) => {
-            User.Username = action.payload
+        setSuccess: (User, action) => {
+            User.Success = action.payload
+        },
+        setError: (User, action) => {
+            User.Error = action.payload
         }
     }
 
 })
 
-export const {setUser} = slice.actions
+export const {setSuccess, setError} = slice.actions
 export default slice.reducer
 
+export const createAccountAPI = (user) => apiCallBegan({
+    url: "http://localhost:8080/api/createUser",
+    data: user,
+    method: "POST",
+    onSucess: setSuccess.type,
+    onError: setError.type,
+
+
+})

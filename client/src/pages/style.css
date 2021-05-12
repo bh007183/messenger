@@ -1,0 +1,17 @@
+
+.formContainer{
+    position: absolute;
+    top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /*  */
+  height: 30%;
+ 
+  
+
+}
+.inputContainer{
+    display: flex;
+    justify-content: center;
+}
+
