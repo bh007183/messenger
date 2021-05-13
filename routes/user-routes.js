@@ -12,7 +12,8 @@ router.post("/api/createUser", async (req, res) => {
       email: req.body.email,
       password: hashPass,
     }).catch(err => res.status(409).json(err).end());
-    await res.status(200).json(data.username);
+    
+   res.status(200).json(data.username);
     
   
 });
@@ -41,7 +42,7 @@ router.post("/login", async (req, res) => {
             res.status(401).send("Error connecting token");
             
           }
-          console.log(token)
+        
           res.json({ token, user: data.username, id: data.id });
         }
       )

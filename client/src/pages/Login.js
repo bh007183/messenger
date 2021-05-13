@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import "./style.css";
 import {Link} from "react-router-dom"
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import {loginAccount} from "../store/userActions"
+import {Redirect} from "react-router-dom"
 
 export default function Login() {
+
   const dispatch = useDispatch()
+  const userState = useSelector(state => state.store.User.Username)
+
+
   const [Login, setLogin] = useState({
     username: "",
     password: "",
@@ -23,15 +28,22 @@ console.log(event.target.name)
     });
   };
 
+ 
+
   const handelSubmit = (event) => {
-      event.preventDefault()
-      dispatch(loginAccount(Login))
+      event.preventDefault();
+      dispatch(loginAccount(Login));
+      
+     
 
 
   }
 
+  
+
   return (
     <>
+    {userState !== "" ? <Redirect to="/main"/> : <></>}
       <form onSubmit={handelSubmit} className="formContainer">
         <br></br>
         <br></br>

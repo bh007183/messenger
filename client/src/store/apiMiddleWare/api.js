@@ -4,7 +4,7 @@ import * as actions from "../apiActionCreators"
 export const api = ({dispatch}) => next => async action => {
     if(action.type !== actions.apiCallBegan.type) return next(action)
     next(action)
-    const {url, method, data, onSuccess, onError} = action.payload
+    const {url, method, headers, data, onSuccess, onError} = action.payload
   
    
     
@@ -12,6 +12,7 @@ try{
     const response = await axios.request({
         url,
         method,
+        headers,
         data,
         onSuccess,
         onError

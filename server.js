@@ -22,11 +22,13 @@ app.use(express.static("public"));
 /////////////////////////////////
 const userRouter = require("./routes/user-routes.js")
 const messageRouter = require("./routes/message-routes.js")
+const conversationRouter = require("./routes/conversation-routes.js")
 
 // Routes
 // =============================================================
 app.use(userRouter)
 app.use(messageRouter)
+app.use(conversationRouter)
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
 

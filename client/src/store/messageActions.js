@@ -6,17 +6,26 @@ const slice = createSlice({
     initialState: {
         Username: "",
         Participents: [],
+        Messages: []
 
     },
     reducers: {
-        setMessage: (Message, action) => {
-            Message.Participents.push("scram")
+        setMessages: (Message, action) => {
+            Message.Messages = action.payload
         }
     }
 
 })
 
-export const {setMessage} = slice.actions
+export const {setMessages} = slice.actions
 export default slice.reducer
+
+export const getAllMessages = () => apiCallBegan({
+    url: `http://localhost:8080/api/getAllMessages`,
+    headers: {authorization: "Bearer: " + localStorage.getItem("token")},
+    method: "GET",
+    onSuccess: setMessages.type,
+    // onError
+})
 
 

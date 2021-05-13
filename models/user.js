@@ -19,6 +19,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false
     
     },
+
     isOnline: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
@@ -29,7 +30,7 @@ module.exports = function (sequelize, DataTypes) {
       // Other model options go here
     });
     User.associate = function(models) {
-        User.hasMany(models.Message)
+        User.hasMany(models.Conversation)
       };
     return User
     }

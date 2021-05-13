@@ -17,7 +17,7 @@ module.exports = function (sequelize, DataTypes) {
       // Other model options go here
     });
     Message.associate = function(models){
-      Message.belongsTo(models.User)
+      Message.belongsTo(models.Conversation)
     }
     return Message
     
