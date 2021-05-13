@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import Grid from "@material-ui/core/Grid";
 
-import {getAllMessages} from "../store/messageActions"
+import {getAllConversations} from "../store/conversationActions"
 import {useSelector, useDispatch} from "react-redux"
  
 
@@ -13,9 +13,9 @@ export default function Main() {
 
 
 
-    useEffect( async () => {
+    useEffect(  () => {
         console.log("potato")
-        await dispatch(getAllMessages())
+        dispatch(getAllConversations())
         
     }, [])
   return (

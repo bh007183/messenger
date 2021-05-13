@@ -16,7 +16,7 @@ const slice = createSlice({
 export const { setConversations } = slice.actions;
 export default slice.reducer;
 
-export const getAllsetConversations = () =>
+export const getAllConversations = () =>
   apiCallBegan({
     url: `http://localhost:8080/api/getAllConversations`,
     headers: { authorization: "Bearer: " + localStorage.getItem("token") },

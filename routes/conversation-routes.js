@@ -5,9 +5,11 @@ const db = require("../models");
 const { Op } = require("sequelize");
 
 router.post("/api/conversation", async (req, res) => {
-  let data = await db.Message.create(req.body).catch((err) =>
+  let data = await db.Conversation.create(req.body).catch((err) =>
     res.status(401).send(err)
   );
+   await data.setUsers(data.UserId)
+ 
   res.json(data);
 });
 
@@ -33,7 +35,7 @@ router.get("/api/getAllConversations", async (req, res) => {
     });
     if (data) {
       console.log(data.id + "line 36")
-      let postedData = await db.Message.findAll({
+      let postedData = await db.Conversation.findAll({
         where: {
           participants: { [Op.like]: "%a" + `${data.id}` + "a%" },
         },
