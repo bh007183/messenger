@@ -1,6 +1,11 @@
 module.exports = function (sequelize, DataTypes) {
     const User = sequelize.define('User', {
       
+      firstandlast:{
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      
       username:{
         type: DataTypes.STRING,
         allowNull: false,
@@ -30,8 +35,8 @@ module.exports = function (sequelize, DataTypes) {
       // Other model options go here
     });
     User.associate = function(models) {
-        User.hasMany(models.Conversation)
-        User.belongsToMany(models.Conversation, {through: "Join"})
+        // User.hasMany(models.Conversation)
+        User.belongsToMany(models.Conversation, {through: "Join", constraints: false})
         
       };
     return User

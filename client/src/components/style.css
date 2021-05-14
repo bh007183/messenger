@@ -3,3 +3,21 @@
     justify-content: center;
     align-items: center;
 }
+.MessageBar{
+    position: fixed;
+    bottom: 0;
+    max-width: 600px;
+    
+}
+
+.conversationToken{
+    background-color: blueviolet;
+    height: 40px;
+    
+}
+
+.recentActivity{
+    background-color: blueviolet;
+    height: 40px;
+    
+}

@@ -8,6 +8,7 @@ export default function CreateAccount() {
   const dispatch = useDispatch()
   const [Login, setLogin] = useState({
     username: "",
+    firstandlast: "",
     password: "",
     verifyPassword: "",
     email: "",
@@ -44,6 +45,16 @@ export default function CreateAccount() {
             name="username"
             value={Login.username}
             placeholder="Username"
+          ></input>
+        </div>
+        <br></br>
+        <br></br>
+        <div className="inputContainer">
+          <input
+            onChange={handleChange}
+            name="firstandlast"
+            value={Login.firstandlast}
+            placeholder="First and Last name"
           ></input>
         </div>
         <br></br>

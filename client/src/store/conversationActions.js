@@ -22,5 +22,5 @@ export const getAllConversations = () =>
     headers: { authorization: "Bearer: " + localStorage.getItem("token") },
     method: "GET",
     onSuccess: setConversations.type,
-    // onError
+    // onError: console.log(action.payload)
   });

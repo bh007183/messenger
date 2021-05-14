@@ -9,7 +9,7 @@ import {Redirect} from "react-router-dom"
 export default function Login() {
 
   const dispatch = useDispatch()
-  const userState = useSelector(state => state.store.User.Username)
+  const userState = useSelector(state => state.store.User.YourName)
 
 
   const [Login, setLogin] = useState({

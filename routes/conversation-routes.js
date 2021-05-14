@@ -4,11 +4,34 @@ const jwt = require("jsonwebtoken");
 const db = require("../models");
 const { Op } = require("sequelize");
 
+//Create a conversation
+
 router.post("/api/conversation", async (req, res) => {
+  
   let data = await db.Conversation.create(req.body).catch((err) =>
     res.status(401).send(err)
   );
-   await data.setUsers(data.UserId)
+  console.log(data.UserId)
+  // replace user id with id in token
+   await data.setUsers(req.body.UserId).catch(err => console.log(err))
+ 
+  res.json(data);
+});
+
+// Add a participent
+
+router.post("/api/addConversationPart", async (req, res) => {
+  
+  let data = await db.Conversation.findOne({
+    where:{
+      id: 1
+    }
+  }).catch((err) =>
+    res.status(401).send(err)
+  );
+  console.log(data.UserId)
+  // replace user id with id in token
+   await data.addUsers(2).catch(err => console.log(err))
  
   res.json(data);
 });
@@ -34,13 +57,14 @@ router.get("/api/getAllConversations", async (req, res) => {
       }
     });
     if (data) {
-      console.log(data.id + "line 36")
-      let postedData = await db.Conversation.findAll({
-        where: {
-          participants: { [Op.like]: "%a" + `${data.id}` + "a%" },
-        },
+      let postedData = await db.User.findOne({
+        where:{
+          id: data.id
+        }
       }).catch((err) => res.json(err));
-      res.json(postedData);
+      
+      let conversations = await postedData.getConversations()
+      res.status(200).json(conversations)
     } else {
       res.status(403);
     }

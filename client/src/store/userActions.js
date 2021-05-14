@@ -5,8 +5,9 @@ import {apiCallBegan} from "./apiActionCreators"
 const slice = createSlice({
     name: "User",
     initialState: {
-        Username: "",
+        YourName: "",
         Friends: [],
+        PossibleFriends: [],
         Success: "",
         Error: ""
 
@@ -17,17 +18,20 @@ const slice = createSlice({
         },
         loginSuccess: (User, action) => {
             console.log(action.payload)
-            User.Username = action.payload.user
+            User.YourName = action.payload.user
             localStorage.setItem("token", action.payload.token)
         },
         setError: (User, action) => {
             User.Error = action.payload
+        },
+        possibleFrinedMatch: (User, action) => {
+            User.PossibleFriends = action.payload
         }
     }
 
 })
 
-export const {setSuccess, setError, loginSuccess} = slice.actions
+export const {setSuccess, setError, loginSuccess, possibleFrinedMatch} = slice.actions
 export default slice.reducer
 
 export const createAccountAPI = (user) => apiCallBegan({
@@ -45,6 +49,20 @@ export const loginAccount = (user) => apiCallBegan({
     method: "POST",
     onSuccess: loginSuccess.type,
     onError: setError.type,
+})
 
-
+export const findFriends = (username) => apiCallBegan({
+    url: `http://localhost:8080/api/findFriends/${username}`,
+    headers: {authorization: "Bearer: " + localStorage.getItem("token")},
+    method: "GET",
+    onSuccess: possibleFrinedMatch.type,
+    // onError: setError.type,
+})
+export const addFriends = (FriendId) => apiCallBegan({
+    url: `http://localhost:8080/api/addFriend`,
+    headers: {authorization: "Bearer: " + localStorage.getItem("token")},
+    data: FriendId,
+    method: "PUT",
+    // onSuccess: possibleFrinedMatch.type,
+    // onError: setError.type,
 })

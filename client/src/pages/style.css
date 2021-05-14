@@ -15,3 +15,28 @@
     justify-content: center;
 }
 
+.searchFriends{
+  margin-top: 6px;
+  width: 100%;
+  border-radius: 20px;
+  
+}
+.findFriendButton{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.possibleFriendResult{
+  background-color: brown;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.possibleFriendResultButton{
+  all: unset;
+  width: 100%;
+  display: flex;
+}
+

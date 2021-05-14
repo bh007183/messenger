@@ -35,7 +35,18 @@ app.use(conversationRouter)
 // app.get("/", (req, res) => {
 //     res.sendFile(path.join(__dirname, "../client/build/index.html"))
 // })
-
+// db.sequelize.query('SET FOREIGN_KEY_CHECKS = 0')
+// .then(function(){
+//     return db.sequelize.sync({ force: true });
+// })
+// .then(function(){
+//     return db.sequelize.query('SET FOREIGN_KEY_CHECKS = 1')
+// })
+// .then(function(){
+//     console.log('Database synchronised.');
+// }, function(err){
+//     console.log(err);
+// });
 // Change force: to true if it's cool for the site to remove database items.
 db.sequelize.sync({ force: false}).then(function () {
   app.listen(PORT, function () {

@@ -14,7 +14,7 @@ module.exports = function (sequelize, DataTypes) {
       // Other model options go here
     });
     Conversation.associate = function(models){
-        Conversation.belongsToMany(models.User, {through: "Join"})
+        Conversation.belongsToMany(models.User, {through: "Join", constraints: false})
         Conversation.hasMany(models.Message)
 
 
