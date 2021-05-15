@@ -26,12 +26,16 @@ const slice = createSlice({
         },
         possibleFrinedMatch: (User, action) => {
             User.PossibleFriends = action.payload
+        },
+        setFriends: (User, action) => {
+            User.Friends = action.payload
         }
+
     }
 
 })
 
-export const {setSuccess, setError, loginSuccess, possibleFrinedMatch} = slice.actions
+export const {setSuccess, setError, loginSuccess, possibleFrinedMatch, setFriends} = slice.actions
 export default slice.reducer
 
 export const createAccountAPI = (user) => apiCallBegan({
@@ -64,5 +68,12 @@ export const addFriends = (FriendId) => apiCallBegan({
     data: FriendId,
     method: "PUT",
     // onSuccess: possibleFrinedMatch.type,
+    // onError: setError.type,
+})
+export const getFriends = () => apiCallBegan({
+    url: `http://localhost:8080/api/getFriends`,
+    headers: {authorization: "Bearer: " + localStorage.getItem("token")},
+    method: "GET",
+    onSuccess: setFriends.type,
     // onError: setError.type,
 })

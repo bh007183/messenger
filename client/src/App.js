@@ -7,6 +7,7 @@ import Container from "@material-ui/core/Container";
 import NavBar from "./components/NavBar";
 import CreateAccount from "./pages/CreateAccount"
 import AddContact from "./pages/AddContact"
+import CreateConversation from "./pages/CreateConversation"
 
 
 import React from "react";
@@ -29,6 +30,9 @@ function App() {
           </Route>
           <Route exact path="/CreateAccount">
             <CreateAccount />
+          </Route>
+          <Route exact path="/CreateConversation">
+            <CreateConversation />
           </Route>
           <Route exact path="/AddContact">
             <AddContact />

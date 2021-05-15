@@ -8,7 +8,8 @@ import IconButton from "@material-ui/core/IconButton";
 import PersonIcon from "@material-ui/icons/Person";
 import { useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import CreateIcon from "@material-ui/icons/Create";
 import "./style.css";
 
 export default function NavBar() {
@@ -30,13 +31,19 @@ export default function NavBar() {
           <Grid container>
             <Grid className="NavItem" item xs={2}>
               <Link to="/AddContact">
-                < PersonAddIcon />
+                <PersonAddIcon />
               </Link>
             </Grid>
             <Grid className="NavItem" item xs={8}>
               {userState}
             </Grid>
-            <Grid className="NavItem" item xs={2}>
+            <Grid className="NavItem" item xs={1}>
+              
+              <Link to="/CreateConversation">
+                <CreateIcon />
+                </Link>
+            </Grid>
+            <Grid className="NavItem" item xs={1}>
               <IconButton
                 aria-controls="simple-menu"
                 aria-haspopup="true"
