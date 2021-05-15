@@ -38,5 +38,30 @@
   all: unset;
   width: 100%;
   display: flex;
+  margin-top: 5px;
+}
+.friendImage{
+  
+  object-fit: cover;
+  height: unset;
+  aspect-ratio: 5 / 5;
+  background-position: center;
+  border-radius: 100%;
+  
+
+  
 }
 
+.startConversationBtn{
+  width: 100%;
+}
+.whiteText{
+  color: white;
+  background-color: black;
+  position: relative;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  
+}

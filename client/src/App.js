@@ -8,6 +8,7 @@ import NavBar from "./components/NavBar";
 import CreateAccount from "./pages/CreateAccount"
 import AddContact from "./pages/AddContact"
 import CreateConversation from "./pages/CreateConversation"
+import Message from "./pages/Message"
 
 
 import React from "react";
@@ -36,6 +37,9 @@ function App() {
           </Route>
           <Route exact path="/AddContact">
             <AddContact />
+          </Route>
+          <Route exact path="/message">
+            <Message />
           </Route>
         </Container>
       </Provider>
