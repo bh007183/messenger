@@ -93,8 +93,8 @@ export default function CreateConversation() {
       {Participents.length > 0 ? (
         
           <Grid className="newConversationConstruction" container>
-            {Participents.map((Part) => (
-            <Grid item xs={2}>
+            {Participents.map((Part, index) => (
+            <Grid key={index} item xs={2}>
               <div
                 style={{
                   backgroundImage: `url("http://placekitten.com/200/300")`,

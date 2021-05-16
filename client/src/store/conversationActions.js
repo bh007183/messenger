@@ -33,6 +33,9 @@ const slice = createSlice({
       Conversation.ConversationCreatedError =
         "A Conversation was unable to be created at this time!";
     },
+    setConversationId: (Conversation, action) => {
+      Conversation.ConversationCreated.ConversationId = action.payload
+    }
   },
 });
 
@@ -41,7 +44,8 @@ export const {
   initialSetConversParticipants,
   successConversCreated,
   errorConversCreated,
-  SuccessReset
+  SuccessReset,
+  setConversationId
 } = slice.actions;
 export default slice.reducer;
 

@@ -4,8 +4,7 @@ import {apiCallBegan} from "./apiActionCreators"
 const slice = createSlice({
     name: "Message",
     initialState: {
-        Username: "",
-        Participents: [],
+        
         Messages: []
 
     },
@@ -25,6 +24,22 @@ export const getAllMessages = () => apiCallBegan({
     headers: {authorization: "Bearer: " + localStorage.getItem("token")},
     method: "GET",
     onSuccess: setMessages.type,
+    // onError
+})
+
+export const sendMessageAPI = (data) => apiCallBegan({
+    url: `http://localhost:8080/api/sendMessage`,
+    headers: {authorization: "Bearer: " + localStorage.getItem("token")},
+    data: data,
+    method: "POST",
+    // onSuccess: setMessages.type,
+    // onError
+})
+export const getSpecificMessages = (id) => apiCallBegan({
+    url: `/api/getSpecificConversation/${id}`,
+    headers: {authorization: "Bearer: " + localStorage.getItem("token")},
+    method: "GET",
+    // onSuccess: setMessages.type,
     // onError
 })
 

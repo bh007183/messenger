@@ -7,6 +7,7 @@
     position: fixed;
     bottom: 0;
     max-width: 600px;
+    background-color: blueviolet;
     
 }
 
@@ -21,3 +22,25 @@
     height: 40px;
     
 }
+.messageInput{
+    resize: none;
+    height: auto;
+    width: 80%;
+    border-radius: 5px;
+    border: hidden;
+
+   
+}
+textarea{
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+
+}
+
+.conversationButton{
+    all: unset;
+    width: 100%;
+    display: flex;
+    margin-top: 5px;
+  }

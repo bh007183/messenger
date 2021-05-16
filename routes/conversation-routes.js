@@ -113,6 +113,41 @@ router.get("/api/getAllConversations", async (req, res) => {
   }
 });
 
+router.get("/api/getSpecificConversation:/id", async (req, res) => {
+  let token = false;
+  if (!req.headers) {
+    token = false;
+  } else if (!req.headers.authorization) {
+    token = false;
+  } else {
+    token = req.headers.authorization.split(" ")[1];
+  }
+  if (!token) {
+    res.status(500);
+  } else {
+    const data = await jwt.verify(token, process.env.JWS_TOKEN, (err, data) => {
+      if (err) {
+        res.status(403).end();
+      } else {
+        return data;
+      }
+    });
+    if (data) {
+      let postedData = await db.Conversation.findOne({
+        where:{
+          id: req.params.id
+        }
+      }).catch((err) => res.json(err));
+      
+      let conversations = await postedData.getConversations()
+      console.log(conversations)
+      // res.status(200).json(conversations)
+    } else {
+      res.status(403);
+    }
+  }
+});
+
 
 
 

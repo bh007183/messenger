@@ -24,6 +24,12 @@ export default function NavBar() {
     setAnchorEl(null);
   };
 
+  const logOut = () => {
+    localStorage.clear();
+    window.location.href = "/"
+
+  }
+
   return (
     <div>
       <AppBar position="static">
@@ -64,7 +70,7 @@ export default function NavBar() {
                 <MenuItem onClick={handleClose}>
                   <Link to="/">Login</Link>
                 </MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={() => {handleClose(); logOut()}}>Logout</MenuItem>
               </Menu>
             </Grid>
           </Grid>
