@@ -51,6 +51,20 @@
 
   
 }
+.friendImageMessage{
+  
+  object-fit: cover;
+  height: unset;
+  aspect-ratio: 5 / 5;
+  background-position: center;
+  border-radius: 100%;
+  
+
+  
+}
+.friendImageMessageContainer{
+  width: 60px;
+}
 
 .startConversationBtn{
   width: 100%;
@@ -64,4 +78,9 @@
   transform: translate(-50%, -50%);
   text-align: center;
   
+}
+.displayMessage{
+  background-color: blueviolet;
+  border-radius: 5px;
+
 }

@@ -10,15 +10,16 @@ export default function Conversations(props) {
   );
 
   const dispatch = useDispatch();
+  let test;
 
   const handleClick = (event) => {
-    console.log(event);
-
     dispatch(setConversationId(event.currentTarget.value));
+    test = true
   };
 
   return (
     <>
+    {conversation !== "" ? <Redirect to="/message"/> : <></>}
       <button
         onClick={handleClick}
         value={props.id}

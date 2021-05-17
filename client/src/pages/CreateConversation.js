@@ -12,7 +12,7 @@ export default function CreateConversation() {
     (state) => state.store.Conversation.initialConversationSet
   );
   const Success = useSelector(
-    (state) => state.store.Conversation.ConversationCreated.Success
+    (state) => state.store.Conversation.ConversationCreated.ConversationId
   );
 
   const [findFriend, setFindFriend] = useState({

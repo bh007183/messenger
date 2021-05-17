@@ -22,7 +22,7 @@ const slice = createSlice({
     },
     successConversCreated: (Conversation, action) => {
       Conversation.initialConversationSet = [];
-      Conversation.ConversationCreated.Success = 1;
+      
       Conversation.ConversationCreated.ConversationId = action.payload.id;
       
     },

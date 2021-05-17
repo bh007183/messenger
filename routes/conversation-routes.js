@@ -113,7 +113,8 @@ router.get("/api/getAllConversations", async (req, res) => {
   }
 });
 
-router.get("/api/getSpecificConversation:/id", async (req, res) => {
+router.get("/api/getSpecificConversation/:id", async (req, res) => {
+  console.log(req.params)
   let token = false;
   if (!req.headers) {
     token = false;
@@ -136,12 +137,26 @@ router.get("/api/getSpecificConversation:/id", async (req, res) => {
       let postedData = await db.Conversation.findOne({
         where:{
           id: req.params.id
-        }
+        },
+        include: {
+          model: db.Message,
+          
+          
+        },
+        
       }).catch((err) => res.json(err));
-      
-      let conversations = await postedData.getConversations()
-      console.log(conversations)
-      // res.status(200).json(conversations)
+      let conversationParticipants = await postedData.getUsers(
+        {attributes: ["firstandlast"]} 
+      )
+
+      const resdata = {
+        messages: postedData.Messages,
+        participants: conversationParticipants
+
+      }
+      // console.log(resdata.users && resdata.messages)
+      res.status(200).json(resdata)
+
     } else {
       res.status(403);
     }

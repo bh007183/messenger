@@ -5,12 +5,14 @@ const slice = createSlice({
     name: "Message",
     initialState: {
         
-        Messages: []
+        Messages: [],
+        Participants: []
 
     },
     reducers: {
         setMessages: (Message, action) => {
-            Message.Messages = action.payload
+            Message.Messages = action.payload.messages
+            Message.Participants = action.payload.participants
         }
     }
 
@@ -36,10 +38,10 @@ export const sendMessageAPI = (data) => apiCallBegan({
     // onError
 })
 export const getSpecificMessages = (id) => apiCallBegan({
-    url: `/api/getSpecificConversation/${id}`,
+    url: `http://localhost:8080/api/getSpecificConversation/${id}`,
     headers: {authorization: "Bearer: " + localStorage.getItem("token")},
     method: "GET",
-    // onSuccess: setMessages.type,
+    onSuccess: setMessages.type,
     // onError
 })
 
