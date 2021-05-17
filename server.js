@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // var corsOptions = {
-//   origin: 'https://bjh-hop-estore.herokuapp.com'
+//   origin: 'https://messenger-improved-bjh.herokuapp.com/'
 // }
 // corsOptions
 app.use(cors());

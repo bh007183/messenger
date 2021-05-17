@@ -27,9 +27,11 @@ export default function Message() {
     socket = io.connect("http://localhost:8080", { path: "/messageRelay" });
 
       socket.on("message", data => {
+          console.log(data)
       dispatch(socketResponse(data))
       })
       socket.on("emit", data => {
+          console.log(data + "flsdkfjsdklfdlkf")
       dispatch(socketResponse(data))
       })
 
