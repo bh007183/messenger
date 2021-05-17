@@ -4,8 +4,10 @@ const jwt = require("jsonwebtoken");
 const db = require("../models");
 const { Op } = require("sequelize");
 
+
+
 router.post("/api/sendmessage", async (req, res) => {
-  console.log(req.body)
+
   let token = false;
   if (!req.headers) {
     token = false;
@@ -14,7 +16,7 @@ router.post("/api/sendmessage", async (req, res) => {
   } else {
     token = req.headers.authorization.split(" ")[1];
   }
-console.log(token)
+
   if (!token) {
     res.status(500);
   } else {
@@ -28,14 +30,17 @@ console.log(token)
     if (data) {
       
       let postedData = await db.Message.create(req.body).catch((err) => res.json(err));
-      console.log(postedData)
+     
       res.status(200);
+
     } else {
       res.status(403);
     }
   }
   
 });
+
+
 
 router.get("/api/getAllMessages", async (req, res) => {
   let token = false;

@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import Grid from "@material-ui/core/Grid";
-import MessageBar from "../components/MessageBar"
+
 import Conversations from "../components/Conversations"
 
 import {getAllConversations} from "../store/conversationActions"

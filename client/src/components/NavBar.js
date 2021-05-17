@@ -31,10 +31,9 @@ export default function NavBar() {
   }
 
   return (
-    <div>
-      <AppBar position="static">
-        <Toolbar variant="dense">
-          <Grid container>
+    
+      <Grid container className="navBar">
+       
             <Grid className="NavItem" item xs={2}>
               <Link to="/AddContact">
                 <PersonAddIcon />
@@ -74,8 +73,7 @@ export default function NavBar() {
               </Menu>
             </Grid>
           </Grid>
-        </Toolbar>
-      </AppBar>
-    </div>
+        
+   
   );
 }

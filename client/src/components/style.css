@@ -3,6 +3,12 @@
     justify-content: center;
     align-items: center;
 }
+.navBar{
+    max-width: 600px;
+    position: fixed;
+    top: 0%;
+    background-color: blueviolet;
+}
 .MessageBar{
     position: fixed;
     bottom: 0;

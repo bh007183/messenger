@@ -84,3 +84,9 @@
   border-radius: 5px;
 
 }
+
+.ParticipantBarContainer{
+  position: fixed;
+  top: 40px;
+  max-width: 600px;
+}
