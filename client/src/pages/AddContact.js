@@ -33,7 +33,12 @@ export default function AddContact() {
   }
 
   return (
+    // <br></br>
     <Grid container>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       <Grid item xs={2}></Grid>
       <Grid item xs={6}>
         <input
