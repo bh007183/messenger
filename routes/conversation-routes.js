@@ -39,18 +39,19 @@ if (!token) {
   });
   if (data) {
     console.log(req.body)
-    let partArr = []
+    let partArr = [{ id: data.id, name: '' }]
     await req.body.forEach(element => {
-      partArr.push(element.id)
+      
+      partArr.push(element)
     });
-    console.log(partArr)
-    console.log({participants: partArr})
+    
     let resData = await db.Conversation.create({participants: JSON.stringify(partArr)}).catch((err) =>
     console.log(err)
   );
 
-   await partArr.forEach(id => {
-    resData.setUsers(id).catch(err => res.status(500).json(err))
+   await partArr.forEach(obj => {
+     
+    resData.setUsers(obj.id).catch(err => res.status(500).json(err))
    }) 
  
    res.status(200).json(resData)
@@ -79,7 +80,7 @@ router.post("/api/addConversationPart", async (req, res) => {
 });
 
 router.get("/api/getAllConversations", async (req, res) => {
-    console.log(req.headers.authorization)
+   
   let token = false;
   if (!req.headers) {
     token = false;
@@ -99,6 +100,7 @@ router.get("/api/getAllConversations", async (req, res) => {
       }
     });
     if (data) {
+      console.log(data)
       let postedData = await db.User.findOne({
         where:{
           id: data.id
@@ -106,6 +108,9 @@ router.get("/api/getAllConversations", async (req, res) => {
       }).catch((err) => res.json(err));
       
       let conversations = await postedData.getConversations()
+      
+     
+      
       res.status(200).json(conversations)
     } else {
       res.status(403);

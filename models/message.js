@@ -10,7 +10,7 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.STRING
       },
       author: {
-        type: DataTypes.INTEGER
+        type: DataTypes.STRING
       }
      
     }, {

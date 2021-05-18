@@ -11,8 +11,8 @@ export default function CreateConversation() {
   const Participents = useSelector(
     (state) => state.store.Conversation.initialConversationSet
   );
-  const Success = useSelector(
-    (state) => state.store.Conversation.ConversationCreated.ConversationId
+  const RedirectControl = useSelector(
+    (state) => state.store.Conversation.ConversationCreated.Redirect
   );
 
   const [findFriend, setFindFriend] = useState({
@@ -45,7 +45,7 @@ export default function CreateConversation() {
 
     <Grid container>
      
-      {Success !== "" ? <Redirect to="/message"/> : <></>}
+      {RedirectControl !== false ? <Redirect push to="/message"/> : <></>}
       <Grid item xs={2}></Grid>
       <Grid item xs={6}>
         <input

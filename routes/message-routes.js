@@ -29,7 +29,9 @@ router.post("/api/sendmessage", async (req, res) => {
     });
     if (data) {
       
-      let postedData = await db.Message.create(req.body).catch((err) => res.json(err));
+      
+      let postedData = await db.Message.create(req.body).catch((err) => console.log(err));
+      // console.log(res.body)
      
       res.status(200);
 

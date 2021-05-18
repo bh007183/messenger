@@ -6,9 +6,11 @@ require("dotenv").config()
 
 const http = require('http');
 const server = http.createServer(app);
+
+// 'https://messenger-improved-bjh.herokuapp.com'
 const io = require("socket.io")(server, {
   cors: {
-    origin: 'https://messenger-improved-bjh.herokuapp.com',
+    origin: '*',
   },
   path: "/messageRelay"
 })
@@ -27,11 +29,11 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-var corsOptions = {
-  origin: 'https://messenger-improved-bjh.herokuapp.com'
-}
+// var corsOptions = {
+//   origin: 'https://messenger-improved-bjh.herokuapp.com'
+// }
 // corsOptions
-app.use(cors(corsOptions));
+app.use(cors());
 
 // Static directory
 
@@ -54,7 +56,6 @@ app.use(conversationRouter)
 io.on('connection', (socket) => {
   console.log(socket.handshake.headers.host)
   socket.on("message", (data) => {
-    socket.send(JSON.parse(data)); // Send message to sender
     socket.broadcast.emit("emit", JSON.parse(data));
   })
   

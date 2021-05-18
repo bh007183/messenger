@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import { SuccessReset } from "../store/conversationActions";
 import ParticipantBar from "../components/ParticipantBar";
 import { getSpecificMessages, socketResponse } from "../store/messageActions";
 import { io } from "socket.io-client";
@@ -9,6 +8,8 @@ import SendIcon from "@material-ui/icons/Send";
 import Grid from "@material-ui/core/Grid";
 import "./style.css";
 import { sendMessageAPI } from "../store/messageActions";
+import {resetRedirect} from "../store/conversationActions"
+
 let socket;
 
 export default function Message() {
@@ -18,24 +19,29 @@ export default function Message() {
   const conversation = useSelector(
     (state) => state.store.Conversation.ConversationCreated.ConversationId
   );
+  const messageAuthor = useSelector((state) => state.store.User.YourName)
   const messages = useSelector((state) => state.store.Message.Messages) || [];
   const Participants =
     useSelector((state) => state.store.Message.Participants) || [];
 
   useEffect(() => {
-      executeScroll()
-    socket = io.connect("https://messenger-improved-bjh.herokuapp.com", { path: "/messageRelay" });
+    executeScroll()
+    socket = io.connect("http://localhost:8080", { path: "/messageRelay" });
 
-      socket.on("message", data => {
-          console.log(data)
-      dispatch(socketResponse(data))
-      })
+      // socket.on("message", data => {
+      //     console.log(data)
+      // dispatch(socketResponse(data))
+      // })
+
       socket.on("emit", data => {
-          console.log(data + "flsdkfjsdklfdlkf")
       dispatch(socketResponse(data))
       })
 
-    dispatch(getSpecificMessages(conversation));
+      dispatch(getSpecificMessages(conversation));
+
+      dispatch(resetRedirect())
+
+
   }, []);
 
  
@@ -47,6 +53,7 @@ export default function Message() {
 
   const [sendMessage, setSendMessage] = useState({
     message: "",
+    author: "",
     ConversationId: conversationId,
   });
 
@@ -63,25 +70,26 @@ export default function Message() {
     setSendMessage({
       ...sendMessage,
       ConversationId: conversationId,
+      author: messageAuthor
     });
     dispatch(sendMessageAPI(sendMessage));
-    // dispatch(socketSend(sendMessage));
     socket.send(JSON.stringify(sendMessage))
   };
 
   return (
     <>
-      <div className="ParticipantBarContainer" style={{ width: "100%", overflow: "scroll", background: "green" }}>
+      <div className="ParticipantBarContainer" style={{ width: "100%", overflow: "scroll", background: "green", display: "flex" }}>
         {Participants.map((Part, index) => (
           <ParticipantBar name={Part.firstandlast} key={index}/>
         ))}
       </div>
+      <div style={{width: "100%", height: "110px"}}></div>
 
       {messages.length > 0 ? (
         messages.map((item, index) => (
           <Grid className="partList" key={index} container>
             <Grid item xs={12}>
-              <div style={{ color: "white" }}>name</div>
+        <div style={{ color: "white" }}>{item.author}</div>
             </Grid>
             <Grid item xs={1}></Grid>
             <Grid className="displayMessage" item xs={10}>
