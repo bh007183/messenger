@@ -23,6 +23,10 @@ var PORT = process.env.PORT || 8080;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
 var corsOptions = {
   origin: 'https://messenger-improved-bjh.herokuapp.com'
 }
@@ -30,7 +34,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 // Static directory
-app.use(express.static("public"));
+
 /////////////////////////////////
 const userRouter = require("./routes/user-routes.js")
 const messageRouter = require("./routes/message-routes.js")
@@ -56,8 +60,9 @@ io.on('connection', (socket) => {
   
 })
 
-app.get("*", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
+  console.log(__dirname, "../client/build/index.html")
 });
 // db.sequelize.query('SET FOREIGN_KEY_CHECKS = 0')
 // .then(function(){
