@@ -39,7 +39,7 @@ export const {setSuccess, setError, loginSuccess, possibleFrinedMatch, setFriend
 export default slice.reducer
 
 export const createAccountAPI = (user) => apiCallBegan({
-    url: "http://localhost:8080/api/createUser",
+    url: "https://messenger-improved-bjh.herokuapp.com/api/createUser",
     data: user,
     method: "POST",
     onSuccess: setSuccess.type,
@@ -48,7 +48,7 @@ export const createAccountAPI = (user) => apiCallBegan({
 
 })
 export const loginAccount = (user) => apiCallBegan({
-    url: "http://localhost:8080/login",
+    url: "https://messenger-improved-bjh.herokuapp.com/login",
     data: user,
     method: "POST",
     onSuccess: loginSuccess.type,
@@ -56,14 +56,14 @@ export const loginAccount = (user) => apiCallBegan({
 })
 
 export const findFriends = (username) => apiCallBegan({
-    url: `http://localhost:8080/api/findFriends/${username}`,
+    url: `https://messenger-improved-bjh.herokuapp.com/api/findFriends/${username}`,
     headers: {authorization: "Bearer: " + localStorage.getItem("token")},
     method: "GET",
     onSuccess: possibleFrinedMatch.type,
     // onError: setError.type,
 })
 export const addFriends = (FriendId) => apiCallBegan({
-    url: `http://localhost:8080/api/addFriend`,
+    url: `https://messenger-improved-bjh.herokuapp.com/api/addFriend`,
     headers: {authorization: "Bearer: " + localStorage.getItem("token")},
     data: FriendId,
     method: "PUT",
@@ -71,7 +71,7 @@ export const addFriends = (FriendId) => apiCallBegan({
     // onError: setError.type,
 })
 export const getFriends = () => apiCallBegan({
-    url: `http://localhost:8080/api/getFriends`,
+    url: `https://messenger-improved-bjh.herokuapp.com/api/getFriends`,
     headers: {authorization: "Bearer: " + localStorage.getItem("token")},
     method: "GET",
     onSuccess: setFriends.type,

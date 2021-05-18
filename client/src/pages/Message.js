@@ -24,7 +24,7 @@ export default function Message() {
 
   useEffect(() => {
       executeScroll()
-    socket = io.connect("http://localhost:8080", { path: "/messageRelay" });
+    socket = io.connect("https://messenger-improved-bjh.herokuapp.com", { path: "/messageRelay" });
 
       socket.on("message", data => {
           console.log(data)
