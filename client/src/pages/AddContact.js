@@ -33,12 +33,10 @@ export default function AddContact() {
   }
 
   return (
-    // <br></br>
+   <>
+   <div style={{width: "100%", height: "50px"}}></div>
     <Grid container>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
+      
       <Grid item xs={2}></Grid>
       <Grid item xs={6}>
         <input
@@ -74,5 +72,6 @@ export default function AddContact() {
         <></>
       )}
     </Grid>
+    </>
   );
 }
