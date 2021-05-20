@@ -44,9 +44,10 @@ export default function CreateConversation() {
     dispatch(createConversationAPI(Participents));
   };
   return (
+    
     <Grid container>
       {RedirectControl !== false ? <Redirect push to="/message" /> : <></>}
-      <Grid item xs={2}></Grid>
+      <Grid className="searchFriends"item xs={2}></Grid>
       <Grid item xs={6}>
         <input
           onChange={handleChange}
@@ -56,10 +57,11 @@ export default function CreateConversation() {
           className="searchFriends"
         ></input>
       </Grid>
-      <Grid className="findFriendButton" item xs={2}>
-        <button>Search</button>
+      <Grid className="findFriendButton" item xs={3}>
+        {/* needs to know what to do */}
+        <button className="a">Search</button>
       </Grid>
-      <Grid item xs={2}></Grid>
+      <Grid item xs={1}></Grid>
       <br></br>
       <br></br>
       <Grid item xs={12}>

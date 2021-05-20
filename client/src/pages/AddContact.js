@@ -72,9 +72,9 @@ export default function AddContact() {
               <button
                 onClick={AddFriend}
                 value={person.id}
-                className="possibleFriendResultButton"
+                className="possibleFriendResultButtonAddContact"
               >
-                <Grid className="possibleFriendResult" item xs={3}>
+                <Grid className="possibleFriendResultAddContact" item xs={3}>
                   <div className="friendImageMessageContainer">
                   <div
                     style={{
@@ -86,7 +86,7 @@ export default function AddContact() {
                   </div>
                   </div>
                 </Grid>
-                <Grid className="possibleFriendResult" item xs={9}>
+                <Grid className="possibleFriendResultAddContact" item xs={9}>
                   {person.firstandlast}
                 </Grid>
               </button>

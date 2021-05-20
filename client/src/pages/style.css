@@ -16,15 +16,20 @@
 }
 
 .searchFriends{
-  margin-top: 6px;
+  margin-top: 60px;
   width: 100%;
   border-radius: 20px;
   
 }
 .findFriendButton{
+  margin-top: 60px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.a{
+  margin-top: 60px;
 }
 .possibleFriendResult{
   background-color: brown;
@@ -34,16 +39,35 @@
   align-items: center;
 
 }
+
 .possibleFriendResultButton{
   all: unset;
- 
- width: 100%;
+  width: 100%;
   margin-top: 6px;
   background-color: blueviolet;
 
 }
+.possibleFriendResultButtonAddContact{
+  all: unset;
+  width: 100%;
+  margin-top: 6px;
+  display: flex;
+}
+.possibleFriendResultAddContact{
+  background-color: brown;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+
+
+
+
+
 .friendImage{
-  
   object-fit: cover;
   height: unset;
   aspect-ratio: 5 / 5;
