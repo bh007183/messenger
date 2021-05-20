@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { apiCallBegan, socketCallBegan } from "./apiActionCreators";
+import {apiCallBegan} from "./apiActionCreators";
 import { io } from "socket.io-client";
 let socket;
 
@@ -14,11 +14,7 @@ const slice = createSlice({
       Message.Messages = action.payload.messages;
       Message.Participants = action.payload.participants;
     },
-//     socketConnect: (Message, action) => {
-//         socket = io.connect("http://localhost:8080", {path: "/messageRelay"})
-      
-      
-//   },
+
     socketResponse: (Message, action) => {
 
        Message.Messages.push(action.payload)

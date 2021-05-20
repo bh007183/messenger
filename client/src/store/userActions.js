@@ -17,7 +17,7 @@ const slice = createSlice({
             User.Success = action.payload
         },
         setError: (User, action) => {
-            User.Error = action.payload;
+            User.Error = action.payload.data;
         },
         resetErrorSuccess: (User, action) => {
             User.Success = action.payload

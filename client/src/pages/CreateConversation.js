@@ -65,40 +65,6 @@ export default function CreateConversation() {
       <Grid item xs={12}>
         <h6 style={{ textAlign: "center", color: "white" }}>Friends</h6>
       </Grid>
-
-      {Friends.length > 0 ? (
-        Friends.map((person) => (
-          <>
-            <button
-              key={person.id}
-              onClick={AddTo}
-              value={JSON.stringify(
-                (addtoconvers = { id: person.id, name: person.firstandlast })
-              )}
-              className="possibleFriendResultButton"
-            >
-              <Grid className="possibleFriendResult" item xs={3}>
-                <div className="friendImageMessageContainer">
-                  <div
-                    style={{
-                      backgroundImage: `url("http://placekitten.com/200/300")`,
-                    }}
-                    className="friendImage"
-                  ></div>
-                </div>
-              </Grid>
-              <Grid className="possibleFriendResult" item xs={9}>
-                {person.firstandlast}
-              </Grid>
-            </button>
-            <br></br>
-            <br></br>
-          </>
-        ))
-      ) : (
-        // <Redirect to="/AddContact"/>
-        <></>
-      )}
       {Participents.length > 0 ? (
         <Grid className="newConversationConstruction" container>
           {Participents.map((Part, index) => (
@@ -125,6 +91,48 @@ export default function CreateConversation() {
       ) : (
         <></>
       )}
+     <Grid item xs={12}>
+      <Grid  container spacing={2} className="FriendsContainer">
+      {Friends.length > 0 ? (
+        Friends.map((person) => (
+          <Grid item xs={6} >
+          
+            <button
+              key={person.id}
+              onClick={AddTo}
+              value={JSON.stringify(
+                (addtoconvers = { id: person.id, name: person.firstandlast })
+              )}
+              className="possibleFriendResultButton"
+            >
+              <div className="possibleFriendResult">
+                <div className="friendImageMessageContainer">
+                  <div
+                    style={{
+                      backgroundImage: `url("http://placekitten.com/200/300")`,
+                    }}
+                    className="friendImage"
+                  ></div>
+                </div>
+              </div>
+              <p style={{textAlign: "center"}}>{person.firstandlast}</p>
+              
+              {/* <Grid className="possibleFriendResult" item xs={9}>
+                {person.firstandlast}
+              </Grid> */}
+            </button>
+            </Grid>
+           
+        ))
+      ) : (
+        
+        <></>
+      )}
+      </Grid>
+      </Grid>
+
+     
+     
     </Grid>
   );
 }

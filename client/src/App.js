@@ -9,6 +9,8 @@ import CreateAccount from "./pages/CreateAccount"
 import AddContact from "./pages/AddContact"
 import CreateConversation from "./pages/CreateConversation"
 import Message from "./pages/Message"
+import Test from "./components/Test"
+
 
 
 import React from "react";
@@ -28,6 +30,9 @@ function App() {
           </Route>
           <Route exact path="/">
             <Login />
+            {/* <Test/> */}
+           
+            
           </Route>
           <Route exact path="/CreateAccount">
             <CreateAccount />

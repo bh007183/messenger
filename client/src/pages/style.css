@@ -28,7 +28,7 @@
 }
 .possibleFriendResult{
   background-color: brown;
-  height: 70px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,9 +36,11 @@
 }
 .possibleFriendResultButton{
   all: unset;
-  width: 100%;
-  display: flex;
-  margin-top: 5px;
+ 
+ width: 100%;
+  margin-top: 6px;
+  background-color: blueviolet;
+
 }
 .friendImage{
   
@@ -90,3 +92,9 @@
   top: 40px;
   max-width: 600px;
 }
+/* 
+.FriendsContainer{
+  /* width: 100% !important; */
+  /* display: flex;  */
+  /* justify-content: space-around;  */
+/* }  */

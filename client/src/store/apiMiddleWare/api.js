@@ -32,7 +32,7 @@ try{
     //general
 dispatch(actions.apiCallFailed(error.response))
 //specific
-if(onError)dispatch({type: onError, payload: error.response.data})
+if(onError)dispatch({type: onError, payload: error.response})
 
 }
    

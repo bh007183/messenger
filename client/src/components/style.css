@@ -1,52 +1,77 @@
-.NavItem{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.NavItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.navBar{
-    max-width: 600px;
-    position: fixed;
-    top: 0%;
-    background-color: blueviolet;
+.navBar {
+  max-width: 600px;
+  position: fixed;
+  top: 0%;
+  background-color: blueviolet;
 }
-.MessageBar{
-    position: fixed;
-    bottom: 0;
-    max-width: 600px;
-    background-color: blueviolet;
-    
-}
-
-.conversationToken{
-    background-color: blueviolet;
-    height: 40px;
-    
+.MessageBar {
+  position: fixed;
+  bottom: 0;
+  max-width: 600px;
+  background-color: blueviolet;
 }
 
-.recentActivity{
-    background-color: blueviolet;
-    height: 40px;
-    
-}
-.messageInput{
-    resize: none;
-    height: auto;
-    width: 80%;
-    border-radius: 5px;
-    border: hidden;
-
-   
-}
-textarea{
-    margin-top: 5px;
-    margin-bottom: 5px;
-
-
+.conversationToken {
+  background-color: blueviolet;
+  height: 40px;
 }
 
-.conversationButton{
-    all: unset;
+.recentActivity {
+  background-color: blueviolet;
+  height: 40px;
+}
+.messageInput {
+  resize: none;
+  height: auto;
+  width: 80%;
+  border-radius: 5px;
+  border: hidden;
+}
+textarea {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.conversationButton {
+  all: unset;
+  width: 100%;
+  display: flex;
+  margin-top: 5px;
+}
+
+/*  */
+
+.background {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4XodTtOKcW-NXRd8WRZXGGt4Cdvt_MjewsHliXd1xlrJkZdiypdVGMmZyA_how_zIw0Q&usqp=CAU");
+  background-size: cover;
+  
+ 
+}
+.background .water {
+    position: absolute;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4XodTtOKcW-NXRd8WRZXGGt4Cdvt_MjewsHliXd1xlrJkZdiypdVGMmZyA_how_zIw0Q&usqp=CAU");
+    background-size: cover;
+    top: 0px;
+    left:0;
+    height: 100%;
     width: 100%;
-    display: flex;
-    margin-top: 5px;
+    filter: url("#turbulence");
+    
   }
+ .test{
+     float: right
+ }
+  
+
+
+
