@@ -114,7 +114,7 @@ router.put("/api/addFriend", async (req, res) => {
   } else {
     const data = await jwt.verify(token, process.env.JWS_TOKEN, (err, data) => {
       if (err) {
-        res.status(403).end();
+        res.status(401).json("Session Expired, please login!");
       } else {
         return data;
       }
@@ -126,24 +126,30 @@ router.put("/api/addFriend", async (req, res) => {
           id: data.id,
         },
       }).catch((err) => res.json(err));
-      let parsed = JSON.parse(returnedData.connections);
-      parsed.push(req.body.id);
+      if (JSON.parse(returnedData.connections.includes(`${req.body.id}`))) {
+        
+        res.status(403).json('Already a friend.');
+        
+      } else {
+        let parsed = JSON.parse(returnedData.connections);
+        parsed.push(req.body.id);
 
-      let updatedVal = await returnedData
-        .update({
-          connections: JSON.stringify(parsed),
-        })
-        .catch((err) => res.json(err));
-      console.log(updatedVal);
-      res.status(200).json(returnedData);
+        let updatedVal = await returnedData
+          .update({
+            connections: JSON.stringify(parsed),
+          })
+          .catch((err) => res.json(err));
+
+        
+        res.status(200).json(`Connection Added!`);
+      }
     } else {
-      res.status(403);
+      res.status(401).json("Unable to verify current user. Please login.");
     }
   }
 });
 // get your friends
 router.get("/api/getFriends", async (req, res) => {
-
   let token = false;
   if (!req.headers) {
     token = false;
@@ -169,11 +175,11 @@ router.get("/api/getFriends", async (req, res) => {
         },
       }).catch((err) => res.json(err));
       let parsed = JSON.parse(returnedData.connections);
-      let arrayToReturn = []
-      for(let i = 0; i < parsed.length; i++){
+      let arrayToReturn = [];
+      for (let i = 0; i < parsed.length; i++) {
         let friendData = await db.User.findOne({
           where: {
-            id: parsed[i]
+            id: parsed[i],
           },
           attributes: {
             exclude: [
@@ -184,12 +190,11 @@ router.get("/api/getFriends", async (req, res) => {
               "updatedAt",
               "username",
             ],
-          }
-        }).catch(err => res.status(401).json(err))
-        arrayToReturn.push(friendData)
-
+          },
+        }).catch((err) => res.status(401).json(err));
+        arrayToReturn.push(friendData);
       }
-      
+
       res.status(200).json(arrayToReturn);
     } else {
       res.status(403);

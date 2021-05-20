@@ -27,10 +27,12 @@ try{
     if(onSuccess)dispatch({type: onSuccess, payload: response.data})
 
 }catch(error){
+    
+    
     //general
-dispatch(actions.apiCallFailed(error.message))
+dispatch(actions.apiCallFailed(error.response))
 //specific
-if(onError)dispatch({type: onError, payload: error})
+if(onError)dispatch({type: onError, payload: error.response.data})
 
 }
    

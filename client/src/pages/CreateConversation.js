@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { getFriends } from "../store/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import Grid from "@material-ui/core/Grid";
-import { initialSetConversParticipants, createConversationAPI } from "../store/conversationActions";
+import {
+  initialSetConversParticipants,
+  createConversationAPI,
+} from "../store/conversationActions";
 import { Redirect } from "react-router-dom";
 
 export default function CreateConversation() {
@@ -38,14 +41,11 @@ export default function CreateConversation() {
   let addtoconvers = {};
 
   const createConversation = () => {
-    dispatch(createConversationAPI(Participents))
-  }
+    dispatch(createConversationAPI(Participents));
+  };
   return (
-    
-
     <Grid container>
-     
-      {RedirectControl !== false ? <Redirect push to="/message"/> : <></>}
+      {RedirectControl !== false ? <Redirect push to="/message" /> : <></>}
       <Grid item xs={2}></Grid>
       <Grid item xs={6}>
         <input
@@ -77,7 +77,16 @@ export default function CreateConversation() {
               )}
               className="possibleFriendResultButton"
             >
-              <Grid className="possibleFriendResult" item xs={3}></Grid>
+              <Grid className="possibleFriendResult" item xs={3}>
+                <div className="friendImageMessageContainer">
+                  <div
+                    style={{
+                      backgroundImage: `url("http://placekitten.com/200/300")`,
+                    }}
+                    className="friendImage"
+                  ></div>
+                </div>
+              </Grid>
               <Grid className="possibleFriendResult" item xs={9}>
                 {person.firstandlast}
               </Grid>
@@ -91,9 +100,8 @@ export default function CreateConversation() {
         <></>
       )}
       {Participents.length > 0 ? (
-        
-          <Grid className="newConversationConstruction" container>
-            {Participents.map((Part, index) => (
+        <Grid className="newConversationConstruction" container>
+          {Participents.map((Part, index) => (
             <Grid key={index} item xs={2}>
               <div
                 style={{
@@ -104,14 +112,16 @@ export default function CreateConversation() {
                 <p className="whiteText">{Part.name}</p>
               </div>
             </Grid>
-            ))}
-            <Grid item xs={12}>
-              <button  onClick={createConversation} className="startConversationBtn">
-                Start Conversation
-              </button>
-            </Grid>
+          ))}
+          <Grid item xs={12}>
+            <button
+              onClick={createConversation}
+              className="startConversationBtn"
+            >
+              Start Conversation
+            </button>
           </Grid>
-        
+        </Grid>
       ) : (
         <></>
       )}
