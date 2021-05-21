@@ -41,9 +41,9 @@ export default function AddContact() {
   return (
     <>
       <div style={{ width: "100%", height: "50px" }}></div>
-      <Grid container>
-        <Grid item xs={2}></Grid>
-        <Grid item xs={6}>
+      <Grid container >
+        <Grid item xs={1}></Grid>
+        <Grid item xs={7}>
           <input
             onChange={handleChange}
             name="firstName"
@@ -52,11 +52,13 @@ export default function AddContact() {
             className="searchFriends"
           ></input>
         </Grid>
+        
+        <Grid item xs={1}></Grid>
 
-        <Grid className="findFriendButton" item xs={2}>
-          <button onClick={handleSearch}>Search</button>
+        <Grid  item xs={2}>
+          <button className="findFriendButton" onClick={handleSearch}>Search</button>
         </Grid>
-        <Grid item xs={2}></Grid>
+        <Grid item xs={1}></Grid>
         <br></br>
         {fail || success ? <Alerts fail={fail} success={success} /> : <></>}
         <br></br>

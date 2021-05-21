@@ -39,16 +39,16 @@ export default function NavBar() {
                 <PersonAddIcon />
               </Link>
             </Grid>
-            <Grid className="NavItem" item xs={8}>
+            <Grid className="NavItem" item xs={6}>
               {userState}
             </Grid>
-            <Grid className="NavItem" item xs={1}>
+            <Grid className="NavItem" item xs={2}>
               
               <Link to="/CreateConversation">
                 <CreateIcon />
                 </Link>
             </Grid>
-            <Grid className="NavItem" item xs={1}>
+            <Grid className="NavItem" item xs={2}>
               <IconButton
                 aria-controls="simple-menu"
                 aria-haspopup="true"
