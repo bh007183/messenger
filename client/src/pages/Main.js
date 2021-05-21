@@ -26,10 +26,10 @@ export default function Main() {
       <br></br>
       <br></br>
       <h3 style ={{textAlign:"center", color: "white"}}>Conversations</h3>
-      {console.log(convers)}
+      
       <Grid container>
         {convers ? (
-          convers.map((item, index) => (
+          convers.slice(0).reverse().map((item, index) => (
             item.Messages.length ?  
             <Conversations id={item.id} participants={JSON.parse(item.participants)} recentMessage={item.Messages[0].message} recentAuthor={item.Messages[0].author} key={index} /> :
             <Conversations id={item.id} participants={JSON.parse(item.participants)} recentMessage={"No Messages as of yet."} key={index} />

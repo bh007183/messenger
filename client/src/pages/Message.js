@@ -8,43 +8,51 @@ import SendIcon from "@material-ui/icons/Send";
 import Grid from "@material-ui/core/Grid";
 import "./style.css";
 import { sendMessageAPI } from "../store/messageActions";
-import {resetRedirect} from "../store/conversationActions"
+import { resetRedirect } from "../store/conversationActions";
 
 let socket;
 
 export default function Message() {
-  const scrollTo = useRef(null)
-  const executeScroll = () => scrollTo.current.scrollIntoView({behavior: 'smooth'}) 
+  const scrollTo = useRef(null);
+  const executeScroll = () =>
+    scrollTo.current.scrollIntoView({ behavior: "smooth" });
   const dispatch = useDispatch();
   const conversation = useSelector(
     (state) => state.store.Conversation.ConversationCreated.ConversationId
   );
-  const messageAuthor = useSelector((state) => state.store.User.YourName)
+  const messageAuthor = useSelector((state) => state.store.User.YourName);
   const messages = useSelector((state) => state.store.Message.Messages) || [];
   const Participants =
     useSelector((state) => state.store.Message.Participants) || [];
 
   useEffect(() => {
-    executeScroll()
-    socket = io.connect("http://localhost:8080", { path: "/messageRelay" });
+    executeScroll();
+    socket = io.connect("http://localhost:8080", {
+      path: `/messageRelay`,
+      extraHeaders: {
+        authorization: "Bearer: " + localStorage.getItem("token"),
+      },
+    });
 
-      // socket.on("message", data => {
-      //     console.log(data)
-      // dispatch(socketResponse(data))
-      // })
+    socket.emit("create", conversation);
 
-      socket.on("emit", data => {
-      dispatch(socketResponse(data))
-      })
+    socket.on("message", (data) => {
+      console.log(data);
+      dispatch(socketResponse(data));
+    });
 
-      dispatch(getSpecificMessages(conversation));
+    socket.on("emit", (data) => {
+      dispatch(socketResponse(data));
+    });
 
-      dispatch(resetRedirect())
+    dispatch(getSpecificMessages(conversation));
 
-
+    dispatch(resetRedirect());
+    return () => {
+      socket.emit("leave", conversation)
+      socket.disconnect();
+    };
   }, []);
-
- 
 
   const conversationId = useSelector(
     (state) => state.store.Conversation.ConversationCreated.ConversationId
@@ -70,26 +78,34 @@ export default function Message() {
     setSendMessage({
       ...sendMessage,
       ConversationId: conversationId,
-      author: messageAuthor
+      author: messageAuthor,
     });
     dispatch(sendMessageAPI(sendMessage));
-    socket.send(JSON.stringify(sendMessage))
+    socket.send(JSON.stringify(sendMessage));
   };
 
   return (
     <>
-      <div className="ParticipantBarContainer" style={{ width: "100%", overflow: "scroll", background: "green", display: "flex" }}>
+      <div
+        className="ParticipantBarContainer"
+        style={{
+          width: "100%",
+          overflow: "scroll",
+          background: "green",
+          display: "flex",
+        }}
+      >
         {Participants.map((Part, index) => (
-          <ParticipantBar name={Part.firstandlast} key={index}/>
+          <ParticipantBar name={Part.firstandlast} key={index} />
         ))}
       </div>
-      <div style={{width: "100%", height: "110px"}}></div>
+      <div style={{ width: "100%", height: "110px" }}></div>
 
       {messages.length > 0 ? (
         messages.map((item, index) => (
           <Grid className="partList" key={index} container>
             <Grid item xs={12}>
-        <div style={{ color: "white" }}>{item.author}</div>
+              <div style={{ color: "white" }}>{item.author}</div>
             </Grid>
             <Grid item xs={1}></Grid>
             <Grid className="displayMessage" item xs={10}>
@@ -98,11 +114,12 @@ export default function Message() {
             <Grid item xs={1}></Grid>
           </Grid>
         ))
-        
       ) : (
         <></>
       )}
-      <div ref={scrollTo} style={{height: "55px"}}> </div>
+      <div ref={scrollTo} style={{ height: "55px" }}>
+        {" "}
+      </div>
 
       <Grid container className="MessageBar">
         <Grid className="inputContainer" item xs={10}>

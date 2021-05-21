@@ -3,7 +3,11 @@ import Grid from "@material-ui/core/Grid";
 import { useDispatch, useSelector } from "react-redux";
 import { setConversationId } from "../store/conversationActions";
 
+
+
+
 export default function Conversations(props) {
+
   const dispatch = useDispatch();
 
   const handleClick = (event) => {
@@ -16,6 +20,7 @@ export default function Conversations(props) {
         onClick={handleClick}
         value={props.id}
         className="conversationButton"
+       
       >
         <Grid className="possibleFriendResult" item xs={3}>
           {props.participants.map(item => (
