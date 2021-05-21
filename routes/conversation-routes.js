@@ -100,18 +100,30 @@ router.get("/api/getAllConversations", async (req, res) => {
       }
     });
     if (data) {
-      console.log(data)
       let postedData = await db.User.findOne({
         where:{
           id: data.id
-        }
+        },
+        include: [
+          {model: db.Conversation,
+          include:[{
+            model: db.Message,
+            limit: 1,
+            order: [ [ 'createdAt', 'DESC' ]],
+          }]}
+        ]
       }).catch((err) => res.json(err));
+      // console.log(postedData)
+      // for(let i = 0; i < postedData.Conversations.length; i++){
+      //   console.log(postedData.Conversations[i].Messages)
+      // }
+      // let conversations = await postedData.getConversations()
       
-      let conversations = await postedData.getConversations()
+      // console.log(conversations)
       
      
       
-      res.status(200).json(conversations)
+      res.status(200).json(postedData)
     } else {
       res.status(403);
     }

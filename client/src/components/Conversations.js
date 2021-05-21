@@ -24,7 +24,9 @@ export default function Conversations(props) {
 
           )}
         </Grid>
-        <Grid className="possibleFriendResult" item xs={9}></Grid>
+        <Grid className="possibleFriendResult" item xs={9}>
+          <div>{props.recentMessage}</div>
+        </Grid>
       </button>
     </>
   );
