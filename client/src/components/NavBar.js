@@ -13,7 +13,7 @@ import CreateIcon from "@material-ui/icons/Create";
 import "./style.css";
 
 export default function NavBar() {
-  const userState = useSelector((state) => state.store.User.YourName);
+  const userState = useSelector((state) => state.store.User.YourName) || localStorage.getItem("user");
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {

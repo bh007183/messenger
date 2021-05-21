@@ -14,25 +14,24 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function Alerts() {
-    const success = useSelector((state) => state.store.User.Success)
-  const fail = useSelector((state) => state.store.User.Error)
+export default function Alerts(props) {
+
   const classes = useStyles();
 
   return (
     <>
-      {fail ? (
+      {props.fail ? (
         <div className={classes.root}>
           <Alert id="Alert" severity="error">
             <AlertTitle>Error</AlertTitle>
-            {fail}
+            {props.fail}
           </Alert>
         </div>
-      ) : success ? (
+      ) : props.success ? (
         <div className={classes.root}>
           <Alert id="Alert" severity="success">
             <AlertTitle>Success</AlertTitle>
-            {success}
+            {props.success}
           </Alert>
         </div>
       ) : (

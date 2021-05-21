@@ -123,3 +123,8 @@
   /* display: flex;  */
   /* justify-content: space-around;  */
 /* }  */
+#messageAlert{
+  
+  position: "fixed" !important;
+  top: "200px" !important
+}

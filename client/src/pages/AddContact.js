@@ -58,7 +58,7 @@ export default function AddContact() {
         </Grid>
         <Grid item xs={2}></Grid>
         <br></br>
-        {fail || success ? <Alerts /> : <></>}
+        {fail || success ? <Alerts fail={fail} success={success} /> : <></>}
         <br></br>
         <br></br>
         <br></br>

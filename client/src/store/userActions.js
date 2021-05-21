@@ -27,6 +27,7 @@ const slice = createSlice({
         loginSuccess: (User, action) => {
             console.log(action.payload)
             User.YourName = action.payload.user
+            localStorage.setItem("user", action.payload.user)
             localStorage.setItem("token", action.payload.token)
         },
        

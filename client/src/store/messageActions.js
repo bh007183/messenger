@@ -8,6 +8,7 @@ const slice = createSlice({
   initialState: {
     Messages: [],
     Participants: [],
+    messageError: ""
   },
   reducers: {
     setMessages: (Message, action) => {
@@ -16,14 +17,17 @@ const slice = createSlice({
     },
 
     socketResponse: (Message, action) => {
-
+       console.log(action.payload)
        Message.Messages.push(action.payload)
       
+  },
+    messageError: (Message, action) => {
+       Message.messageError = action.payload
   },
 }
 });
 
-export const { setMessages, socketResponse} = slice.actions;
+export const { setMessages, socketResponse, messageError} = slice.actions;
 export default slice.reducer;
 
 export const getAllMessages = () =>

@@ -34,6 +34,7 @@ const userRouter = require("./routes/user-routes.js");
 const messageRouter = require("./routes/message-routes.js");
 const conversationRouter = require("./routes/conversation-routes.js");
 
+
 // Routes
 // =============================================================
 app.use(userRouter);
@@ -52,6 +53,12 @@ const io = require("socket.io")(server, {
 
 const users = [];
 io.on("connection", async (socket) => {
+
+  const socketErr = () =>{
+    socket.emit("error", "There is an issue with live connection, Please re-login. If issue persists you likely do not have permission to join live conversation")
+    socket.disconnect()
+  }
+
   let token = false;
   if (!socket.handshake.headers) {
     token = false;
@@ -61,12 +68,13 @@ io.on("connection", async (socket) => {
     token = socket.handshake.headers.authorization.split(" ")[1];
   }
   if (!token) {
-    console.log("error with token line 65 on server");
-    socket.disconnect();
+    console.log("bastered 70")
+    socketErr()
   } else {
     const data = await jwt.verify(token, process.env.JWS_TOKEN, (err, data) => {
       if (err) {
-        console.log("error with token line 70 on server");
+        console.log("bastered 74")
+        socketErr()
       } else {
         return data;
       }
@@ -76,11 +84,14 @@ io.on("connection", async (socket) => {
         where: {
           id: data.id,
         },
-      }).catch((err) => console.log(err));
-      let assoc = await results.getConversations();
+      }).catch((err) =>  console.log("bastered 84"));
+      let assoc = await results.getConversations().catch((err) =>  console.log("bastered 86") )
 
       socket.on("create", function (room) {
+        
         for (let i = 0; i < assoc.length; i++) {
+          console.log(assoc[i].id)
+          console.log(parseInt(room))
           if (assoc[i].id === parseInt(room)) {
             socket.join(room);
             console.log(io.sockets.adapter.rooms.get(room));
@@ -91,11 +102,23 @@ io.on("connection", async (socket) => {
 
       socket.on("message", (data) => {
         let parsedData = JSON.parse(data);
-        console.log(parsedData);
-        socket.send(parsedData);
-        socket.broadcast
-          .to(parseInt(parsedData.ConversationId))
-          .emit("emit", parsedData);
+        let allowed = false
+        for (let i = 0; i < assoc.length; i++) {
+          if (assoc[i].id === parseInt(parsedData.ConversationId)) {
+            allowed = true
+            socket.send(parsedData);
+            socket.broadcast
+              .to(parsedData.ConversationId)
+              .emit("emit", parsedData);
+            break;
+          }
+        }
+        if(allowed !== true){
+          
+            console.log("bastered 94")
+            socketErr()
+          
+        }
       });
 
       socket.on("leave", (data) => {
@@ -103,15 +126,15 @@ io.on("connection", async (socket) => {
         console.log("lin 86 in server file");
         socket.leave(data);
       });
+
       socket.on("disconnect", (reason) => {
         console.log(reason);
-        console.log("disconect working")
-
-  
+        console.log("disconnect working")
       });
+
     } else {
-      console.log("error with token line 94 on server");
-      socket.disconnect();
+      console.log("bastered 126")
+      socketErr()
     }
   }
 });

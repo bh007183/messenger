@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import ParticipantBar from "../components/ParticipantBar";
-import { getSpecificMessages, socketResponse } from "../store/messageActions";
+import { getSpecificMessages, socketResponse, sendMessageAPI, messageError } from "../store/messageActions";
 import { io } from "socket.io-client";
 import React, { useState, useEffect, useRef } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import SendIcon from "@material-ui/icons/Send";
 import Grid from "@material-ui/core/Grid";
 import "./style.css";
-import { sendMessageAPI } from "../store/messageActions";
 import { resetRedirect } from "../store/conversationActions";
+import Alerts from "../components/Alerts"
 
 let socket;
 
@@ -24,6 +24,7 @@ export default function Message() {
   const messages = useSelector((state) => state.store.Message.Messages) || [];
   const Participants =
     useSelector((state) => state.store.Message.Participants) || [];
+    const messageErr = useSelector((state) => state.store.Message.messageError)
 
   useEffect(() => {
     executeScroll();
@@ -44,6 +45,10 @@ export default function Message() {
     socket.on("emit", (data) => {
       dispatch(socketResponse(data));
     });
+
+    socket.on("error", (data) => {
+      dispatch(messageError(data))
+    })
 
     dispatch(getSpecificMessages(conversation));
 
@@ -100,6 +105,7 @@ export default function Message() {
         ))}
       </div>
       <div style={{ width: "100%", height: "110px" }}></div>
+      
 
       {messages.length > 0 ? (
         messages.map((item, index) => (
@@ -117,6 +123,7 @@ export default function Message() {
       ) : (
         <></>
       )}
+      {messageErr !== "" ?<Alerts fail={messageErr} />  : <></>}
       <div ref={scrollTo} style={{ height: "55px" }}>
         {" "}
       </div>
