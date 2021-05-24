@@ -63,21 +63,13 @@ if (!token) {
 
 // Add a participent
 
-router.post("/api/addConversationPart", async (req, res) => {
-  
-  let data = await db.Conversation.findOne({
-    where:{
-      id: 1
-    }
-  }).catch((err) =>
-    res.status(401).send(err)
-  );
-  console.log(data.UserId)
-  // replace user id with id in token
-   await data.addUsers(2).catch(err => console.log(err))
- 
-  res.json(data);
-});
+
+
+
+
+
+
+
 
 router.get("/api/getAllConversations", async (req, res) => {
    

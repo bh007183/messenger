@@ -24,10 +24,14 @@ const slice = createSlice({
     messageError: (Message, action) => {
        Message.messageError = action.payload
   },
+  addPart: (Message, action) => {
+    Message.Participants.push(action.payload)
+
+  }
 }
 });
 
-export const { setMessages, socketResponse, messageError} = slice.actions;
+export const { setMessages, socketResponse, messageError, addPart} = slice.actions;
 export default slice.reducer;
 
 export const getAllMessages = () =>
@@ -57,7 +61,12 @@ export const getSpecificMessages = (id) =>
     // onError
   });
 
-//   export const socketSend = (data) => {
-//       socket.send(data)
-
-//   }
+  export const addMessagePartAPI = (Participent) =>
+  apiCallBegan({
+    url: `http://localhost:8080/api/addMessagePart`,
+    headers: { authorization: "Bearer: " + localStorage.getItem("token") },
+    data: Participent,
+    method: "POST",
+    onSuccess: addPart.type,
+    // onError: errorConversCreated.type,
+  });

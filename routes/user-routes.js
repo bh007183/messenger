@@ -126,28 +126,14 @@ router.put("/api/addFriend", async (req, res) => {
           id: data.id,
         },
       }).catch((err) => res.json(err));
-      if (JSON.parse(returnedData.connections.includes(`${req.body.id}`))) {
-        
-        res.status(403).json('Already a friend.');
-        
-      } else {
-        let parsed = JSON.parse(returnedData.connections);
-        parsed.push(req.body.id);
-
-        let updatedVal = await returnedData
-          .update({
-            connections: JSON.stringify(parsed),
-          })
-          .catch((err) => res.json(err));
-
-        
+      await returnedData.addFriend(req.body.id).catch(err => res.status(403).json('Already a friend.'))
         res.status(200).json(`Connection Added!`);
-      }
     } else {
       res.status(401).json("Unable to verify current user. Please login.");
     }
   }
 });
+
 // get your friends
 router.get("/api/getFriends", async (req, res) => {
   let token = false;
@@ -174,34 +160,76 @@ router.get("/api/getFriends", async (req, res) => {
           id: data.id,
         },
       }).catch((err) => res.json(err));
-      let parsed = JSON.parse(returnedData.connections);
-      let arrayToReturn = [];
-      for (let i = 0; i < parsed.length; i++) {
-        let friendData = await db.User.findOne({
-          where: {
-            id: parsed[i],
-          },
-          attributes: {
-            exclude: [
-              "password",
-              "connections",
-              "email",
-              "createdAt",
-              "updatedAt",
-              "username",
-            ],
-          },
-        }).catch((err) => res.status(401).json(err));
-        arrayToReturn.push(friendData);
-      }
 
-      res.status(200).json(arrayToReturn);
+
+      let returnFriends = await returnedData.getFriends({attributes: {
+        exclude: [
+          "password",
+          "connections",
+          "email",
+          "createdAt",
+          "updatedAt",
+          "username",
+        ],
+      }})
+      res.status(200).json(returnFriends)
     } else {
       res.status(403);
     }
   }
 });
 
+
+router.get("/api/searchCurrentFriends/:name", async (req, res) => {
+  let token = false;
+  if (!req.headers) {
+    token = false;
+  } else if (!req.headers.authorization) {
+    token = false;
+  } else {
+    token = req.headers.authorization.split(" ")[1];
+  }
+  if (!token) {
+    res.status(500);
+  } else {
+    const data = await jwt.verify(token, process.env.JWS_TOKEN, (err, data) => {
+      if (err) {
+        res.status(403).end();
+      } else {
+        return data;
+      }
+    });
+    if (data) {
+      let returnedData = await db.User.findOne({
+        where: {
+          id: data.id,
+        }
+      }).catch((err) => res.json(err));
+
+
+      let returnFriends = await returnedData.getFriends({
+        where:{
+          firstandlast:{
+          [Op.substring] : req.params.name
+          }
+        },
+        attributes: {
+        exclude: [
+          "password",
+          "connections",
+          "email",
+          "createdAt",
+          "updatedAt",
+          "username",
+        ],
+      }})
+      console.log(returnFriends)
+      res.status(200).json(returnFriends)
+    } else {
+      res.status(403);
+    }
+  }
+});
 
 
 module.exports = router;

@@ -41,6 +41,7 @@ const slice = createSlice({
         // not in use
         setSearched: (User, action) => {
             User.SearchedFriends = action.payload
+           
         }
 
     }
@@ -89,6 +90,14 @@ export const getFriends = () => apiCallBegan({
     headers: {authorization: "Bearer: " + localStorage.getItem("token")},
     method: "GET",
     onSuccess: setFriends.type,
+    // onError: setError.type,
+})
+
+export const searchCurrentFriends = (firstandlast) => apiCallBegan({
+    url: `http://localhost:8080/api/searchCurrentFriends/${firstandlast}`,
+    headers: {authorization: "Bearer: " + localStorage.getItem("token")},
+    method: "GET",
+    onSuccess: setSearched.type,
     // onError: setError.type,
 })
 

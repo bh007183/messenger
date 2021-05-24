@@ -37,6 +37,7 @@ module.exports = function (sequelize, DataTypes) {
     User.associate = function(models) {
         // User.hasMany(models.Conversation)
         User.belongsToMany(models.Conversation, {through: "Join", constraints: false})
+        User.belongsToMany(User, {as: "Friends", through: "JoinFriend", constraints: false})
         
       };
     return User

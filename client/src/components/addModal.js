@@ -3,7 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { useDispatch, useSelector } from "react-redux";
 import Grid from '@material-ui/core/Grid'
-import findCurrentFriends from "../store/userActions"
+import {searchCurrentFriends} from "../store/userActions"
+import {addMessagePartAPI} from "../store/messageActions"
+
 
 
 function rand() {
@@ -26,6 +28,7 @@ function getModalStyle() {
 export default function AddModal(props) {
   const dispatch = useDispatch()
   const Friends = useSelector((state) => state.store.User.SearchedFriends);
+  const CurrentConversation = useSelector((state) => state.store.Conversation.ConversationCreated.ConversationId);
   console.log(Friends)
 
   const [findFriend, setFindFriend] = useState({
@@ -40,12 +43,14 @@ export default function AddModal(props) {
       [name]: value,
     });
 
-    dispatch(findCurrentFriends(findFriend.firstName))
+    dispatch(searchCurrentFriends(findFriend.firstName))
 
   };
-  // useEffect(() => {
-  //   dispatch(findCurrentFriends(findFriend.firstName))
-  // }, [findFriend.firstName])
+
+  const addPart = (event) => {
+    dispatch(addMessagePartAPI({ConversationId: CurrentConversation, UserId: event.currentTarget.value}))
+  }
+
 
    
 
@@ -80,18 +85,25 @@ export default function AddModal(props) {
         <h6 style={{ textAlign: "center", color: "white" }}>Friends</h6>
       </Grid>
       </Grid>
-     {Friends.map(friend => {
-       <>
-       <Grid item xs={4}>
-         <img src="https://placedog.net/500"></img>
+      <Grid container>
+     {Friends.map(friend => 
+     <>
+       <button onClick={addPart} value={friend.id} className="possibleFriendResultButtonAddContact">
+       <Grid style={{height: "40px"}} item xs={4}>
+         <img style={{height: "40px"}} src="https://placedog.net/500"></img>
        </Grid>
-       <Grid item xs={8}>
+       <Grid style={{height: "40px"}} item xs={8}>
          {friend.firstandlast}
 
+       
        </Grid>
+       </button>
+       <br></br>
+       <br></br>
        </>
 
-     })} 
+     )} 
+     </Grid>
       
       
     </div>
