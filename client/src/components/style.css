@@ -68,9 +68,15 @@ textarea {
     filter: url("#turbulence");
     
   }
- .test{
-     float: right
- }
+.modal{
+  max-width: 500px;
+  min-height: 70vh;
+  background-color: brown;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 
   

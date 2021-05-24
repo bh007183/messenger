@@ -7,6 +7,7 @@ const slice = createSlice({
     initialState: {
         YourName: "",
         Friends: [],
+        SearchedFriends: [],
         PossibleFriends: [],
         Success: "",
         Error: ""
@@ -36,13 +37,17 @@ const slice = createSlice({
         },
         setFriends: (User, action) => {
             User.Friends = action.payload
+        },
+        // not in use
+        setSearched: (User, action) => {
+            User.SearchedFriends = action.payload
         }
 
     }
 
 })
 
-export const {setSuccess, setError, resetErrorSuccess, loginSuccess, possibleFrinedMatch, setFriends} = slice.actions
+export const {setSuccess, setError, resetErrorSuccess, loginSuccess, possibleFrinedMatch, setFriends, setSearched} = slice.actions
 export default slice.reducer
 
 export const createAccountAPI = (user) => apiCallBegan({
@@ -86,3 +91,4 @@ export const getFriends = () => apiCallBegan({
     onSuccess: setFriends.type,
     // onError: setError.type,
 })
+

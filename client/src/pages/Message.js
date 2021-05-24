@@ -9,7 +9,9 @@ import Grid from "@material-ui/core/Grid";
 import "./style.css";
 import { resetRedirect } from "../store/conversationActions";
 import Alerts from "../components/Alerts"
-
+import AddIcon from '@material-ui/icons/Add';
+import AddModal from "../components/addModal"
+import { getFriends } from "../store/userActions";
 let socket;
 
 export default function Message() {
@@ -89,10 +91,31 @@ export default function Message() {
     socket.send(JSON.stringify(sendMessage));
   };
 
+  // modal handler
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const GetFriends = () => {
+    handleOpen();
+    dispatch(getFriends())
+  }
+
   return (
     <>
+    <AddModal handleOpen={handleOpen} handleClose={handleClose} open={open}/>
+    
+    <Grid container className="ParticipantBarContainer">
+    <Grid item xs={11}>
       <div
-        className="ParticipantBarContainer"
+        
         style={{
           width: "100%",
           overflow: "scroll",
@@ -104,7 +127,15 @@ export default function Message() {
           <ParticipantBar name={Part.firstandlast} key={index} />
         ))}
       </div>
-      <div style={{ width: "100%", height: "110px" }}></div>
+     
+      </Grid>
+      <Grid style={{display: "flex", justifyContent:"center", alignItems: "center"}} item xs={1}>
+      <IconButton style={{background: "blue"}} size="small" onClick={GetFriends}>
+        <AddIcon></AddIcon>
+
+        </IconButton>
+      </Grid>
+      </Grid>
       
 
       {messages.length > 0 ? (

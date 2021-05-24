@@ -202,4 +202,6 @@ router.get("/api/getFriends", async (req, res) => {
   }
 });
 
+
+
 module.exports = router;
