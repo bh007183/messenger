@@ -113,7 +113,7 @@ export default function Message() {
     <AddModal handleOpen={handleOpen} handleClose={handleClose} open={open}/>
     
     <Grid container className="ParticipantBarContainer">
-    <Grid style={{height: "60px"}} item xs={11}>
+    <Grid item xs={11}>
       <div
         
         style={{
