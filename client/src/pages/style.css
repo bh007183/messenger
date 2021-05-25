@@ -92,6 +92,8 @@
 .friendImageMessageContainer{
   width: 60px;
   height: 60px;
+  margin-right: "3px";
+  margin-left: "3px"
 }
 
 .startConversationBtn{
