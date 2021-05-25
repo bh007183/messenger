@@ -20,7 +20,7 @@ export default function Login() {
     let name = event.target.name;
     let value = event.target.value;
 
-console.log(event.target.name)
+
     setLogin({
       ...Login,
       [name]: value,

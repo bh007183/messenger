@@ -14,12 +14,12 @@ import "./style.css"
 
 export default function AddModal(props) {
   const dispatch = useDispatch()
-  console.log("runin")
+  
   const Friends = useSelector((state) => state.store.User.SearchedFriends);
 
   // const result: Friends = useSelector(selector: Function, equalityFn?: Function)
   const CurrentConversation = useSelector((state) => state.store.Conversation.ConversationCreated.ConversationId);
-  console.log(Friends)
+  
 
   const [findFriend, setFindFriend] = useState({
     firstName: "",

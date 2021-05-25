@@ -21,11 +21,11 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-// var corsOptions = {
-//   origin: 'https://messenger-improved-bjh.herokuapp.com'
-// }
-// corsOptions
-app.use(cors());
+var corsOptions = {
+  origin: 'https://messenger-improved-bjh.herokuapp.com'
+}
+corsOptions
+app.use(cors(corsOptions));
 
 // Static directory
 
@@ -46,7 +46,7 @@ app.use(conversationRouter);
 // Sockets
 const io = require("socket.io")(server, {
   cors: {
-    origin: "*",
+    origin: "https://messenger-improved-bjh.herokuapp.com",
   },
   path: "/messageRelay",
 });

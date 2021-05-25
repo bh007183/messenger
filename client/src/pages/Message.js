@@ -30,7 +30,7 @@ export default function Message() {
 
   useEffect(() => {
     executeScroll();
-    socket = io.connect("http://localhost:8080", {
+    socket = io.connect("https://messenger-improved-bjh.herokuapp.com", {
       path: `/messageRelay`,
       extraHeaders: {
         authorization: "Bearer: " + localStorage.getItem("token"),
@@ -40,7 +40,7 @@ export default function Message() {
     socket.emit("create", conversation);
 
     socket.on("message", (data) => {
-      console.log(data);
+   
       dispatch(socketResponse(data));
     });
 
@@ -64,7 +64,7 @@ export default function Message() {
   const conversationId = useSelector(
     (state) => state.store.Conversation.ConversationCreated.ConversationId
   );
-  console.log(conversationId);
+  
 
   const [sendMessage, setSendMessage] = useState({
     message: "",
