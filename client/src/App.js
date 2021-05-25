@@ -1,4 +1,4 @@
-import logo from "./logo.svg";
+
 import "./App.css";
 import configureStore from "./store/configureStore";
 import { Provider } from "react-redux";
@@ -9,12 +9,12 @@ import CreateAccount from "./pages/CreateAccount"
 import AddContact from "./pages/AddContact"
 import CreateConversation from "./pages/CreateConversation"
 import Message from "./pages/Message"
-import Test from "./components/Test"
+// import Test from "./components/Test"
 
 
 
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route} from "react-router-dom";
 import Login from "./pages/Login";
 
 function App() {

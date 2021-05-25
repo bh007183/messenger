@@ -7,22 +7,22 @@
   max-width: 600px;
   position: fixed;
   top: 0%;
-  background-color: blueviolet;
+  background-color: #5D5C61;
 }
 .MessageBar {
   position: fixed;
   bottom: 0;
   max-width: 600px;
-  background-color: blueviolet;
+  background-color: #5D5C61;
 }
 
 .conversationToken {
-  background-color: blueviolet;
+  background-color: #379683;
   height: 40px;
 }
 
 .recentActivity {
-  background-color: blueviolet;
+  background-color: #379683;
   height: 40px;
 }
 .messageInput {
@@ -71,7 +71,7 @@ textarea {
 .modal{
   max-width: 500px;
   min-height: 70vh;
-  background-color: brown;
+  background-color: #557A95;
   position: absolute;
   top: 50%;
   left: 50%;

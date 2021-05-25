@@ -40,7 +40,13 @@ const slice = createSlice({
         },
         // not in use
         setSearched: (User, action) => {
+            // console.log(action.payload)
             User.SearchedFriends = action.payload
+           
+        },
+        noSetSearched: (User, action) => {
+           
+            User.SearchedFriends = []
            
         }
 
@@ -48,7 +54,7 @@ const slice = createSlice({
 
 })
 
-export const {setSuccess, setError, resetErrorSuccess, loginSuccess, possibleFrinedMatch, setFriends, setSearched} = slice.actions
+export const {setSuccess, setError, resetErrorSuccess, loginSuccess, possibleFrinedMatch, setFriends, setSearched, noSetSearched} = slice.actions
 export default slice.reducer
 
 export const createAccountAPI = (user) => apiCallBegan({
@@ -98,6 +104,6 @@ export const searchCurrentFriends = (firstandlast) => apiCallBegan({
     headers: {authorization: "Bearer: " + localStorage.getItem("token")},
     method: "GET",
     onSuccess: setSearched.type,
-    // onError: setError.type,
+    onError: noSetSearched.type,
 })
 

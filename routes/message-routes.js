@@ -31,7 +31,7 @@ router.post("/api/sendmessage", async (req, res) => {
       
       
       let postedData = await db.Message.create(req.body).catch((err) => console.log(err));
-      // console.log(res.body)
+      
      
       res.status(200);
 
@@ -53,7 +53,7 @@ router.get("/api/getAllMessages", async (req, res) => {
   } else {
     token = req.headers.authorization.split(" ")[1];
   }
-console.log(token)
+
   if (!token) {
     res.status(500);
   } else {
@@ -65,7 +65,7 @@ console.log(token)
       }
     });
     if (data) {
-      console.log(data.id + "line 36")
+      
       let postedData = await db.Message.findAll({
         where: {
           participants: { [Op.like]: "%a" + `${data.id}` + "a%" },

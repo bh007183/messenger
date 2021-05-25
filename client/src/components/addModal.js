@@ -1,33 +1,23 @@
-import React, {useState, useEffect} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, {useState} from 'react';
 import Modal from '@material-ui/core/Modal';
 import { useDispatch, useSelector } from "react-redux";
 import Grid from '@material-ui/core/Grid'
 import {searchCurrentFriends} from "../store/userActions"
 import {addMessagePartAPI} from "../store/messageActions"
+import "./style.css"
 
 
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
 
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
 
 
 
 export default function AddModal(props) {
   const dispatch = useDispatch()
+  console.log("runin")
   const Friends = useSelector((state) => state.store.User.SearchedFriends);
+
+  // const result: Friends = useSelector(selector: Function, equalityFn?: Function)
   const CurrentConversation = useSelector((state) => state.store.Conversation.ConversationCreated.ConversationId);
   console.log(Friends)
 
@@ -35,27 +25,26 @@ export default function AddModal(props) {
     firstName: "",
   });
 
-  const handleChange = (event) => {
+  
+  const handleChange = (event, search) => {
+    
     let value = event.target.value;
-    let name = event.target.name;
     setFindFriend({
       ...findFriend,
-      [name]: value,
-    });
+      firstName: value,
+    }); 
 
-    dispatch(searchCurrentFriends(findFriend.firstName))
-
+    dispatch(searchCurrentFriends(event.target.value))
+      
+ 
+    
   };
+
 
   const addPart = (event) => {
     dispatch(addMessagePartAPI({ConversationId: CurrentConversation, UserId: event.currentTarget.value}))
   }
 
-
-   
-
-
- 
 
   const body = (
     <div className={"modal"}>
@@ -65,8 +54,7 @@ export default function AddModal(props) {
       <Grid item  xs={8}>
         <input
           onChange={handleChange}
-          name="firstName"
-          value={findFriend.firstName}
+         
           placeholder="Search friends"
           style={{borderRadius: "20px", width: "95%"}}
         ></input>
@@ -90,7 +78,7 @@ export default function AddModal(props) {
      <>
        <button onClick={addPart} value={friend.id} className="possibleFriendResultButtonAddContact">
        <Grid style={{height: "40px"}} item xs={4}>
-         <img style={{height: "40px"}} src="https://placedog.net/500"></img>
+         <img style={{height: "40px"}} src="https://placedog.net/500" alt="Profile Pic"></img>
        </Grid>
        <Grid style={{height: "40px"}} item xs={8}>
          {friend.firstandlast}

@@ -31,7 +31,7 @@
   margin-top: 60px;
 }
 .possibleFriendResult{
-  background-color: brown;
+  background-color: #007685;
   height: 100px;
   display: flex;
   justify-content: center;
@@ -43,7 +43,7 @@
   all: unset;
   width: 100%;
   margin-top: 6px;
-  background-color: blueviolet;
+  background-color: #557a95;
 
 }
 .possibleFriendResultButtonAddContact{
@@ -51,9 +51,10 @@
   width: 100%;
   margin-top: 6px;
   display: flex;
+  background-color: #B1A296;
 }
 .possibleFriendResultAddContact{
-  background-color: brown;
+  background-color: #B1A296;
   height: 60px;
   display: flex;
   justify-content: center;
@@ -105,7 +106,7 @@
   
 }
 .displayMessage{
-  background-color: blueviolet;
+  background-color: #557A95;
   border-radius: 5px;
   overflow-wrap: break-word;
 
@@ -114,7 +115,7 @@
 
 .ParticipantBarContainer{
   position: fixed;
-  top: 40px;
+  top: 48px;
   max-width: 600px;
 }
 /* 

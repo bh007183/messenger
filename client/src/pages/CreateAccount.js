@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import Grid from "@material-ui/core/Grid";
+
 import { useDispatch, useSelector } from "react-redux";
 import "./style.css";
-import {createAccountAPI, resetErrorSuccess} from "../store/userActions"
+import { createAccountAPI, resetErrorSuccess } from "../store/userActions";
 import Alerts from "../components/Alerts";
 
 export default function CreateAccount() {
   const success = useSelector((state) => state.store.User.Success);
   const fail = useSelector((state) => state.store.User.Error);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [Login, setLogin] = useState({
     username: "",
     firstandlast: "",
@@ -26,24 +26,26 @@ export default function CreateAccount() {
     });
   };
 
-  const submitHandler = (event) =>{
+  const submitHandler = (event) => {
+    event.preventDefault();
 
-      event.preventDefault()
-      
-      if(Login.password === Login.verifyPassword){
-        dispatch(createAccountAPI(Login))
+    if (Login.password === Login.verifyPassword) {
+      dispatch(createAccountAPI(Login));
+    }
 
-      }
-      setTimeout(() => {
+    setTimeout(() => {
+      if (success === "") {
         dispatch(resetErrorSuccess(""));
-        
-      }, 3000);
-      
-  }
+        window.location.href = "/";
+      }
+      if (fail === "") {
+        dispatch(resetErrorSuccess(""));
+      }
+    }, 3000);
+  };
 
   return (
     <>
-
       <form onSubmit={submitHandler} className="formContainer">
         <br></br>
         <br></br>

@@ -11,7 +11,6 @@ router.post("/api/conversation", async (req, res) => {
   let data = await db.Conversation.create(req.body).catch((err) =>
     res.status(401).send(err)
   );
-  console.log(data.UserId)
   // replace user id with id in token
    await data.setUsers(req.body.UserId).catch(err => console.log(err))
  
@@ -38,7 +37,7 @@ if (!token) {
     }
   });
   if (data) {
-    console.log(req.body)
+   
     let partArr = [{ id: data.id, name: '' }]
     await req.body.forEach(element => {
       
@@ -105,13 +104,7 @@ router.get("/api/getAllConversations", async (req, res) => {
           }]}
         ]
       }).catch((err) => res.json(err));
-      // console.log(postedData)
-      // for(let i = 0; i < postedData.Conversations.length; i++){
-      //   console.log(postedData.Conversations[i].Messages)
-      // }
-      // let conversations = await postedData.getConversations()
       
-      // console.log(conversations)
       
      
       
@@ -123,7 +116,7 @@ router.get("/api/getAllConversations", async (req, res) => {
 });
 
 router.get("/api/getSpecificConversation/:id", async (req, res) => {
-  console.log(req.params)
+
   let token = false;
   if (!req.headers) {
     token = false;
@@ -163,7 +156,7 @@ router.get("/api/getSpecificConversation/:id", async (req, res) => {
         participants: conversationParticipants
 
       }
-      // console.log(resdata.users && resdata.messages)
+      
       res.status(200).json(resdata)
 
     } else {

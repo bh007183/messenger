@@ -69,9 +69,9 @@ router.get("/api/findFriends/:name", async (req, res) => {
         return data;
       }
     });
-    console.log(data);
+   
     if (data) {
-      console.log(data);
+      
       let returnedData = await db.User.findAll({
         where: {
           firstandlast: {
@@ -89,7 +89,7 @@ router.get("/api/findFriends/:name", async (req, res) => {
           ],
         },
       }).catch((err) => res.json(err));
-      console.log(returnedData);
+      
       res.status(200).json(returnedData);
     } else {
       res.status(403);
@@ -100,7 +100,7 @@ router.get("/api/findFriends/:name", async (req, res) => {
 // add friend
 
 router.put("/api/addFriend", async (req, res) => {
-  console.log(req.body);
+
   let token = false;
   if (!req.headers) {
     token = false;
@@ -119,7 +119,7 @@ router.put("/api/addFriend", async (req, res) => {
         return data;
       }
     });
-    console.log(data);
+    
     if (data) {
       let returnedData = await db.User.findOne({
         where: {
@@ -223,7 +223,7 @@ router.get("/api/searchCurrentFriends/:name", async (req, res) => {
           "username",
         ],
       }})
-      console.log(returnFriends)
+     
       res.status(200).json(returnFriends)
     } else {
       res.status(403);

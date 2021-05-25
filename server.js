@@ -68,12 +68,10 @@ io.on("connection", async (socket) => {
     token = socket.handshake.headers.authorization.split(" ")[1];
   }
   if (!token) {
-    console.log("bastered 70")
     socketErr()
   } else {
     const data = await jwt.verify(token, process.env.JWS_TOKEN, (err, data) => {
       if (err) {
-        console.log("bastered 74")
         socketErr()
       } else {
         return data;
@@ -90,8 +88,7 @@ io.on("connection", async (socket) => {
       socket.on("create", function (room) {
         
         for (let i = 0; i < assoc.length; i++) {
-          console.log(assoc[i].id)
-          console.log(parseInt(room))
+        
           if (assoc[i].id === parseInt(room)) {
             socket.join(room);
             console.log(io.sockets.adapter.rooms.get(room));

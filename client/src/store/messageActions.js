@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {apiCallBegan} from "./apiActionCreators";
-import { io } from "socket.io-client";
-let socket;
+
 
 const slice = createSlice({
   name: "Message",
@@ -25,7 +24,13 @@ const slice = createSlice({
        Message.messageError = action.payload
   },
   addPart: (Message, action) => {
-    Message.Participants.push(action.payload)
+    console.log(action.payload)
+    if(Message.Participants.includes(action.payload)){
+
+    }else{
+      Message.Participants.push(action.payload)
+    }
+   
 
   }
 }

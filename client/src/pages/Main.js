@@ -17,7 +17,6 @@ export default function Main() {
   );
 
   useEffect(() => {
-    console.log("potato");
     dispatch(getAllConversations());
   }, []);
   return (
@@ -27,7 +26,7 @@ export default function Main() {
       <br></br>
       <h3 style ={{textAlign:"center", color: "white"}}>Conversations</h3>
       
-      <Grid container>
+      {/* <Grid container> */}
         {convers ? (
           convers.slice(0).reverse().map((item, index) => (
             item.Messages.length ?  
@@ -37,7 +36,7 @@ export default function Main() {
         ) : (
           <p>You will need to add friends and then create a Conversation</p>
         )}
-      </Grid>
+      {/* </Grid> */}
     </>
   );
 }

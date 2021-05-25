@@ -119,7 +119,7 @@ export default function Message() {
         style={{
           width: "100%",
           overflow: "scroll",
-          background: "green",
+          background: "#7395AE",
           display: "flex",
         }}
       >
@@ -129,15 +129,17 @@ export default function Message() {
       </div>
      
       </Grid>
-      <Grid style={{display: "flex", justifyContent:"center", alignItems: "center"}} item xs={1}>
-      <IconButton style={{background: "blue"}} size="small" onClick={GetFriends}>
+      <Grid style={{display: "flex",background: "#7395AE", justifyContent:"center", alignItems: "center"}} item xs={1}>
+      <IconButton style={{background: "#557A95"}} size="small" onClick={GetFriends}>
         <AddIcon></AddIcon>
 
         </IconButton>
       </Grid>
       </Grid>
       
+      <Grid item xs={12} style={{height: "110px"}}>
 
+      </Grid>
       {messages.length > 0 ? (
         messages.map((item, index) => (
           <Grid className="partList" key={index} container>

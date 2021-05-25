@@ -1,13 +1,11 @@
 import React from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import Grid from "@material-ui/core/Grid";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import IconButton from "@material-ui/core/IconButton";
 import PersonIcon from "@material-ui/icons/Person";
 import { useSelector } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Link} from "react-router-dom";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import CreateIcon from "@material-ui/icons/Create";
 import "./style.css";
@@ -36,7 +34,7 @@ export default function NavBar() {
        
             <Grid className="NavItem" item xs={2}>
               <Link to="/AddContact">
-                <PersonAddIcon />
+                <PersonAddIcon style={{color: "white"}}/>
               </Link>
             </Grid>
             <Grid className="NavItem" item xs={6}>
@@ -45,7 +43,7 @@ export default function NavBar() {
             <Grid className="NavItem" item xs={2}>
               
               <Link to="/CreateConversation">
-                <CreateIcon />
+                <CreateIcon style={{color: "white"}} />
                 </Link>
             </Grid>
             <Grid className="NavItem" item xs={2}>
@@ -54,7 +52,7 @@ export default function NavBar() {
                 aria-haspopup="true"
                 onClick={handleClick}
               >
-                <PersonIcon />
+                <PersonIcon style={{color: "white"}} />
               </IconButton>
               <Menu
                 id="simple-menu"

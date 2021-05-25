@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Grid from "@material-ui/core/Grid";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { setConversationId } from "../store/conversationActions";
 
 
@@ -15,24 +15,31 @@ export default function Conversations(props) {
   };
 
   return (
-    <>
+    <Grid container>
+      <Grid item xs={12}>
       <button
         onClick={handleClick}
         value={props.id}
         className="conversationButton"
+        
        
       >
-        <Grid className="possibleFriendResult" item xs={3}>
+        <Grid className="possibleFriendResult"container>
+        <Grid  item xs={3}>
+          <Grid container>
           {props.participants.map(item => (
-            <div style={{fontSize: "8px", color:"white"}}>{item.name}</div>
+            <Grid item xs={12} style={{fontSize: "8px", color:"white", textAlign: "center"}}>{item.name}</Grid>
           )
 
           )}
+          </Grid>
         </Grid>
-        <Grid className="possibleFriendResult" item xs={9}>
-          <div>{props.recentMessage}</div>
+        <Grid   item xs={9}>
+          <div style={{wordWrap: "break-word"}}>{props.recentMessage}</div>
+        </Grid>
         </Grid>
       </button>
-    </>
+      </Grid>
+    </Grid>
   );
 }
