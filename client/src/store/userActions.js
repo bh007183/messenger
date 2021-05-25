@@ -58,7 +58,7 @@ export const {setSuccess, setError, resetErrorSuccess, loginSuccess, possibleFri
 export default slice.reducer
 
 export const createAccountAPI = (user) => apiCallBegan({
-    url: "https://messenger-improved-bjh.herokuapp.com/api/createUser",
+    url: "http://localhost:8080/api/createUser",
     data: user,
     method: "POST",
     onSuccess: setSuccess.type,
@@ -67,7 +67,7 @@ export const createAccountAPI = (user) => apiCallBegan({
 
 })
 export const loginAccount = (user) => apiCallBegan({
-    url: "https://messenger-improved-bjh.herokuapp.com/login",
+    url: "http://localhost:8080/login",
     data: user,
     method: "POST",
     onSuccess: loginSuccess.type,
@@ -75,14 +75,14 @@ export const loginAccount = (user) => apiCallBegan({
 })
 
 export const findFriends = (username) => apiCallBegan({
-    url: `https://messenger-improved-bjh.herokuapp.com/api/findFriends/${username}`,
+    url: `http://localhost:8080/api/findFriends/${username}`,
     headers: {authorization: "Bearer: " + localStorage.getItem("token")},
     method: "GET",
     onSuccess: possibleFrinedMatch.type,
     // onError: setError.type,
 })
 export const addFriends = (FriendId) => apiCallBegan({
-    url: `https://messenger-improved-bjh.herokuapp.com/api/addFriend`,
+    url: `http://localhost:8080/api/addFriend`,
     headers: {authorization: "Bearer: " + localStorage.getItem("token")},
     data: FriendId,
     method: "PUT",
@@ -92,7 +92,7 @@ export const addFriends = (FriendId) => apiCallBegan({
 
 
 export const getFriends = () => apiCallBegan({
-    url: `https://messenger-improved-bjh.herokuapp.com/api/getFriends`,
+    url: `http://localhost:8080/api/getFriends`,
     headers: {authorization: "Bearer: " + localStorage.getItem("token")},
     method: "GET",
     onSuccess: setFriends.type,
@@ -100,7 +100,7 @@ export const getFriends = () => apiCallBegan({
 })
 
 export const searchCurrentFriends = (firstandlast) => apiCallBegan({
-    url: `https://messenger-improved-bjh.herokuapp.com/api/searchCurrentFriends/${firstandlast}`,
+    url: `http://localhost:8080/api/searchCurrentFriends/${firstandlast}`,
     headers: {authorization: "Bearer: " + localStorage.getItem("token")},
     method: "GET",
     onSuccess: setSearched.type,

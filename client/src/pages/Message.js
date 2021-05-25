@@ -30,7 +30,7 @@ export default function Message() {
 
   useEffect(() => {
     executeScroll();
-    socket = io.connect("https://messenger-improved-bjh.herokuapp.com", {
+    socket = io.connect("http://localhost:8080", {
       path: `/messageRelay`,
       extraHeaders: {
         authorization: "Bearer: " + localStorage.getItem("token"),
@@ -140,7 +140,7 @@ export default function Message() {
       <Grid item xs={12} style={{height: "110px"}}>
         {/* spacer block for mesages */}
       </Grid>
-
+      
       {messages.length > 0 ? (
         messages.map((item, index) => (
           <Grid className="partList" key={index} container>

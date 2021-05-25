@@ -55,7 +55,7 @@ export default slice.reducer;
 
 export const getAllConversations = () =>
   apiCallBegan({
-    url: `https://messenger-improved-bjh.herokuapp.com/api/getAllConversations`,
+    url: `http://localhost:8080/api/getAllConversations`,
     headers: { authorization: "Bearer: " + localStorage.getItem("token") },
     method: "GET",
     onSuccess: setConversations.type,
@@ -64,7 +64,7 @@ export const getAllConversations = () =>
 
 export const createConversationAPI = (Participents) =>
   apiCallBegan({
-    url: `https://messenger-improved-bjh.herokuapp.com/api/createConversation`,
+    url: `http://localhost:8080/api/createConversation`,
     headers: { authorization: "Bearer: " + localStorage.getItem("token") },
     data: Participents,
     method: "POST",
