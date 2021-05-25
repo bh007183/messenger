@@ -14,9 +14,9 @@ router.post("/api/createUser", async (req, res) => {
     username: req.body.username,
     email: req.body.email,
     password: hashPass,
-  }).catch((err) => res.status(409).json(err).end());
+  }).catch((err) => res.status(409).send("Failed. Please check to make sure you have a valid email, no empty fields and if that is all good then try a different username.").end());
 
-  res.status(200).json(data.username);
+  res.status(200).send("Account Created!");
 });
 
 // user login

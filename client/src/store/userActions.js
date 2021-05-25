@@ -55,8 +55,8 @@ export const createAccountAPI = (user) => apiCallBegan({
     url: "http://localhost:8080/api/createUser",
     data: user,
     method: "POST",
-    // onSuccess: setSuccess.type,
-    // onError: setError.type,
+    onSuccess: setSuccess.type,
+    onError: setError.type,
 
 
 })
