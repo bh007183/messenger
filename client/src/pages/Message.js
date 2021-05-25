@@ -113,7 +113,7 @@ export default function Message() {
     <AddModal handleOpen={handleOpen} handleClose={handleClose} open={open}/>
     
     <Grid container className="ParticipantBarContainer">
-    <Grid item xs={11}>
+    <Grid style={{height: "60px"}} item xs={11}>
       <div
         
         style={{
@@ -138,8 +138,9 @@ export default function Message() {
       </Grid>
       
       <Grid item xs={12} style={{height: "110px"}}>
-
+        {/* spacer block for mesages */}
       </Grid>
+
       {messages.length > 0 ? (
         messages.map((item, index) => (
           <Grid className="partList" key={index} container>
