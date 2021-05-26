@@ -42,6 +42,18 @@ textarea {
   width: 100%;
   display: flex;
   margin-top: 5px;
+  
+}
+.conversationContain{
+  background-color: #007685;
+  height: 100px;
+  border-radius: 20px 20px 1px 1px
+}
+.textAlign{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*  */
@@ -77,6 +89,7 @@ textarea {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 
 
   

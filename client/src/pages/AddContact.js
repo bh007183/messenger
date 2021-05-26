@@ -68,7 +68,7 @@ export default function AddContact() {
           <h6 style={{ textAlign: "center", color: "white" }}>Results</h6>
         </Grid>
 
-        {results.length > 0 ? (
+        {results.length > 0 && results[0] !== "empty" ? (
           results.map((person) => (
             <>
               <button
@@ -95,7 +95,10 @@ export default function AddContact() {
             </>
           ))
         ) : (
-          <></>
+          results[0] === "empty" ? 
+          <Grid item xs={12}>
+          <p style={{color: "white", textAlign: "center"}}>No friends by that name</p> 
+          </Grid>: <></>
         )}
       </Grid>
     </>

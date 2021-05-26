@@ -92,8 +92,8 @@
 .friendImageMessageContainer{
   width: 60px;
   height: 60px;
-  margin-right: "3px";
-  margin-left: "3px"
+  margin-right: 3px;
+  margin-left: 3px
 }
 
 .startConversationBtn{
@@ -111,10 +111,9 @@
 }
 .displayMessage{
   background-color: #557A95;
-  border-radius: 5px;
+  border-radius: 10px;
   overflow-wrap: break-word;
-
-
+  min-height: 20px;
 }
 
 .ParticipantBarContainer{

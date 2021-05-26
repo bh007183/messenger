@@ -7,7 +7,6 @@ const { Op } = require("sequelize");
 
 
 router.post("/api/sendmessage", async (req, res) => {
-
   let token = false;
   if (!req.headers) {
     token = false;
@@ -28,6 +27,7 @@ router.post("/api/sendmessage", async (req, res) => {
       }
     });
     if (data) {
+      req.body.author = data.firstandlast
       
       
       let postedData = await db.Message.create(req.body).catch((err) => console.log(err));
@@ -89,11 +89,11 @@ router.post("/api/addMessagePart", async (req, res) => {
     token = req.headers.authorization.split(" ")[1];
   }
   if (!token) {
-    res.status(500);
+    res.status(500).send("Please Create Account and Login.");
   } else {
     const data = await jwt.verify(token, process.env.JWS_TOKEN, (err, data) => {
       if (err) {
-        res.status(403).end();
+        res.status(403).send("Session Expired. Please Login.").end();
       } else {
         return data;
       }
@@ -104,25 +104,24 @@ router.post("/api/addMessagePart", async (req, res) => {
           id: req.body.ConversationId
         }
       }).catch((err) =>
-        res.status(401).send(err)
+        res.status(401).send("Issue adding participant")
       );
 
-      let parti = await data.addUser(req.body.UserId).catch(err => console.log(err))
+      let parti = await data.addUser(req.body.UserId).catch(err => res.status(401).send("Already participating"))
 
       let newPart = await db.User.findOne({
         where: {
           id: req.body.UserId
         },
         attributes:["firstandlast"]
-      }).catch(err => console.log(err))
+      }).catch(err => res.status(400).send("Issue adding participant"))
 
-      console.log(parti)
       res.status(200).json(newPart);
 
       
     
     } else {
-      res.status(403);
+      res.status(403).send("Session Expired. Please Login.");
     }
   }
 });

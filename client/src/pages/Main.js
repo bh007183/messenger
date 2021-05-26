@@ -15,7 +15,7 @@ export default function Main() {
   const convers = useSelector(
     (state) => state.store.Conversation.Conversations.Conversations
   );
-
+console.log(convers)
   useEffect(() => {
     dispatch(getAllConversations());
   }, []);
@@ -30,8 +30,8 @@ export default function Main() {
         {convers ? (
           convers.slice(0).reverse().map((item, index) => (
             item.Messages.length ?  
-            <Conversations id={item.id} participants={JSON.parse(item.participants)} recentMessage={item.Messages[0].message} recentAuthor={item.Messages[0].author} key={index} /> :
-            <Conversations id={item.id} participants={JSON.parse(item.participants)} recentMessage={"No Messages as of yet."} key={index} />
+            <Conversations id={item.id} participants={item.Users} recentMessage={item.Messages[0].message} recentAuthor={item.Messages[0].author} key={index} /> :
+            <Conversations id={item.id} participants={item.Users} recentMessage={"No Messages as of yet."} key={index} />
           ))
         ) : (
           <p>You will need to add friends and then create a Conversation</p>

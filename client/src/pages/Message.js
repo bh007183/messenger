@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import ParticipantBar from "../components/ParticipantBar";
-import { getSpecificMessages, socketResponse, sendMessageAPI, messageError } from "../store/messageActions";
+import { getSpecificMessages, socketResponse, sendMessageAPI, Error, resetError } from "../store/messageActions";
 import { io } from "socket.io-client";
 import React, { useState, useEffect, useRef } from "react";
 import IconButton from "@material-ui/core/IconButton";
@@ -22,11 +22,11 @@ export default function Message() {
   const conversation = useSelector(
     (state) => state.store.Conversation.ConversationCreated.ConversationId
   );
-  const messageAuthor = useSelector((state) => state.store.User.YourName);
+  
   const messages = useSelector((state) => state.store.Message.Messages) || [];
   const Participants =
     useSelector((state) => state.store.Message.Participants) || [];
-    const messageErr = useSelector((state) => state.store.Message.messageError)
+    const fail = useSelector((state) => state.store.Message.Error)
 
   useEffect(() => {
     executeScroll();
@@ -49,7 +49,7 @@ export default function Message() {
     });
 
     socket.on("error", (data) => {
-      dispatch(messageError(data))
+      dispatch(Error(data))
     })
 
     dispatch(getSpecificMessages(conversation));
@@ -68,7 +68,7 @@ export default function Message() {
 
   const [sendMessage, setSendMessage] = useState({
     message: "",
-    author: "",
+    author: localStorage.getItem("user"),
     ConversationId: conversationId,
   });
 
@@ -85,7 +85,6 @@ export default function Message() {
     setSendMessage({
       ...sendMessage,
       ConversationId: conversationId,
-      author: messageAuthor,
     });
     dispatch(sendMessageAPI(sendMessage));
     socket.send(JSON.stringify(sendMessage));
@@ -144,12 +143,13 @@ export default function Message() {
       {messages.length > 0 ? (
         messages.map((item, index) => (
           <Grid className="partList" key={index} container>
-            <Grid item xs={12}>
-              <div style={{ color: "white" }}>{item.author}</div>
+            <Grid item xs={2}></Grid>
+            <Grid item xs={10}>
+              <div style={{ color: "#557A95", marginTop:"7px" }}>{item.author}</div>
             </Grid>
             <Grid item xs={1}></Grid>
             <Grid className="displayMessage" item xs={10}>
-              {item.message}
+              <p>{item.message}</p>
             </Grid>
             <Grid item xs={1}></Grid>
           </Grid>
@@ -157,7 +157,7 @@ export default function Message() {
       ) : (
         <></>
       )}
-      {messageErr !== "" ?<Alerts fail={messageErr} />  : <></>}
+      {fail !== "" ? <Alerts fail={fail} />  : <></>}
       <div ref={scrollTo} style={{ height: "55px" }}>
         {" "}
       </div>

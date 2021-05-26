@@ -38,7 +38,7 @@ if (!token) {
   });
   if (data) {
    
-    let partArr = [{ id: data.id, name: '' }]
+    let partArr = [{ id: data.id, name: data.firstandlast }]
     await req.body.forEach(element => {
       
       partArr.push(element)
@@ -52,7 +52,7 @@ if (!token) {
      
     resData.setUsers(obj.id).catch(err => res.status(500).json(err))
    }) 
- 
+   
    res.status(200).json(resData)
   } else {
     res.status(403);
@@ -101,6 +101,8 @@ router.get("/api/getAllConversations", async (req, res) => {
             model: db.Message,
             limit: 1,
             order: [ [ 'createdAt', 'DESC' ]],
+          },{
+            model: db.User,
           }]}
         ]
       }).catch((err) => res.json(err));

@@ -34,6 +34,7 @@ router.post("/login", async (req, res) => {
       {
         username: data.username,
         id: data.id,
+        firstandlast: data.firstandlast
       },
       process.env.JWS_TOKEN,
       { expiresIn: "1hr" },
@@ -145,11 +146,11 @@ router.get("/api/getFriends", async (req, res) => {
     token = req.headers.authorization.split(" ")[1];
   }
   if (!token) {
-    res.status(500);
+    res.status(500).send("Authorization issue, create an account or Please Login");
   } else {
     const data = await jwt.verify(token, process.env.JWS_TOKEN, (err, data) => {
       if (err) {
-        res.status(403).end();
+        res.status(403).send("Authorization issue, create an account or Please Login").end();
       } else {
         return data;
       }
@@ -159,7 +160,7 @@ router.get("/api/getFriends", async (req, res) => {
         where: {
           id: data.id,
         },
-      }).catch((err) => res.json(err));
+      }).catch((err) => res.send("Issue retrieving current friends"));
 
 
       let returnFriends = await returnedData.getFriends({attributes: {

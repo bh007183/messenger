@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Grid from '@material-ui/core/Grid'
 import {searchCurrentFriends} from "../store/userActions"
 import {addMessagePartAPI} from "../store/messageActions"
+import {setModalError, resetMessage } from "../store/messageActions";
 import "./style.css"
+import Alerts from "../components/Alerts"
+
 
 
 
@@ -14,6 +17,8 @@ import "./style.css"
 
 export default function AddModal(props) {
   const dispatch = useDispatch()
+  const fail = useSelector((state) => state.store.Message.modalError)
+  const success = useSelector((state) => state.store.Message.Success)
   
   const Friends = useSelector((state) => state.store.User.SearchedFriends);
 
@@ -40,6 +45,16 @@ export default function AddModal(props) {
     
   };
 
+  if(fail !== "") {
+    setTimeout(() => {
+      dispatch(resetMessage())
+    }, 3000);
+  }
+  if(success !== "") {
+    setTimeout(() => {
+      dispatch(resetMessage())
+    }, 3000);
+  }
 
   const addPart = (event) => {
     dispatch(addMessagePartAPI({ConversationId: CurrentConversation, UserId: event.currentTarget.value}))
@@ -49,9 +64,11 @@ export default function AddModal(props) {
   const body = (
     <div className={"modal"}>
       <Grid container>
-    
+      
       <Grid className="searchFriends"item xs={2}></Grid>
       <Grid item  xs={8}>
+      <br></br>
+      <br></br>
         <input
           onChange={handleChange}
          
@@ -60,27 +77,21 @@ export default function AddModal(props) {
         ></input>
       </Grid>
       <Grid className="searchFriends"item xs={2}></Grid>
-      <Grid className="searchFriends"item xs={4}></Grid>
-      <Grid className="findFriendButton" item xs={4}>
-        {/* needs to know what to do */}
-        <button >Search</button>
-      </Grid>
-      <Grid className="searchFriends"item xs={4}></Grid>
       
-      <br></br>
-      <br></br>
+      
       <Grid item xs={12}>
-        <h6 style={{ textAlign: "center", color: "white" }}>Friends</h6>
+        <h4 style={{ textAlign: "center", color: "white", marginTop: "6px", marginBottom: "6px" }}>Friends</h4>
       </Grid>
       </Grid>
+      <Alerts fail={fail} success={success} /> 
       <Grid container>
      {Friends.map(friend => 
      <>
        <button onClick={addPart} value={friend.id} className="possibleFriendResultButtonAddContact">
-       <Grid style={{height: "40px"}} item xs={4}>
-         <img style={{height: "40px"}} src="https://placedog.net/500" alt="Profile Pic"></img>
+       <Grid style={{height: "50px"}} item xs={4}>
+         <img style={{height: "50px"}} src="https://placedog.net/500" alt="Profile Pic"></img>
        </Grid>
-       <Grid style={{height: "40px"}} item xs={8}>
+       <Grid style={{height: "50px", display: "flex", justifyContent: "center", alignItems: 'center'}} item xs={8}>
          {friend.firstandlast}
 
        

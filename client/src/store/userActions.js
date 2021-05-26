@@ -33,7 +33,12 @@ const slice = createSlice({
         },
        
         possibleFrinedMatch: (User, action) => {
-            User.PossibleFriends = action.payload
+            if(action.payload.length > 0){
+                User.PossibleFriends = action.payload 
+            }else{
+                User.PossibleFriends = ["empty"]
+            }
+            
         },
         setFriends: (User, action) => {
             User.Friends = action.payload
@@ -96,7 +101,7 @@ export const getFriends = () => apiCallBegan({
     headers: {authorization: "Bearer: " + localStorage.getItem("token")},
     method: "GET",
     onSuccess: setFriends.type,
-    // onError: setError.type,
+    onError: setError.type,
 })
 
 export const searchCurrentFriends = (firstandlast) => apiCallBegan({

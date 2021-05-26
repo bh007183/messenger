@@ -7,7 +7,9 @@ const slice = createSlice({
   initialState: {
     Messages: [],
     Participants: [],
-    messageError: ""
+    Error: "",
+    modalError: "",
+    Success: ""
   },
   reducers: {
     setMessages: (Message, action) => {
@@ -20,23 +22,32 @@ const slice = createSlice({
        Message.Messages.push(action.payload)
       
   },
-    messageError: (Message, action) => {
-       Message.messageError = action.payload
+      Error: (Message, action) => {
+        
+       Message.Error = action.payload.data
   },
+      setModalError: (Message, action) => {
+        
+       Message.modalError = action.payload.data
+  },
+  resetMessage: (Message, action) => {
+    Message.Error = ""
+    Message.modalError = ""
+    Message.Success = ""
+},
   addPart: (Message, action) => {
   
-    if(Message.Participants.includes(action.payload)){
-
-    }else{
+    
       Message.Participants.push(action.payload)
-    }
+      Message.Success = "Added Participant"
+    
    
 
   }
 }
 });
 
-export const { setMessages, socketResponse, messageError, addPart} = slice.actions;
+export const { setMessages, socketResponse, Error, setModalError, resetMessage, addPart} = slice.actions;
 export default slice.reducer;
 
 export const getAllMessages = () =>
@@ -73,5 +84,5 @@ export const getSpecificMessages = (id) =>
     data: Participent,
     method: "POST",
     onSuccess: addPart.type,
-    // onError: errorConversCreated.type,
+    onError: setModalError.type,
   });
