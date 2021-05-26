@@ -42,10 +42,10 @@ export default function NavBar() {
       ) : (
         <Grid container className="navBar">
           <Drawers open={state} handleClose={handleDrawerClose} />
-          <Grid className="NavItem" item xs={3}>
+          <Grid className="NavItem" item xs={6}>
             <p style={{ color: "white" }}>{userState}</p>
           </Grid>
-          <Grid className="NavItem" item xs={5}></Grid>
+          <Grid className="NavItem" item xs={2}></Grid>
           <Grid className="NavItem" item xs={2}>
             <Link to="/CreateConversation">
               <CreateIcon style={{ color: "white" }} />

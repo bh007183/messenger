@@ -19,7 +19,7 @@ export default function Conversations(props) {
           className="conversationButton"
         >
           <Grid className="conversationContain" container>
-            <Grid item xs={3}>
+            <Grid item xs={4}>
               <br></br>
               
               <Grid container>
@@ -31,14 +31,18 @@ export default function Conversations(props) {
                       fontSize: "11px",
                       color: "white",
                       textAlign: "center",
+                      fontWeight: "bold",
+                      overflow: "hidden"
                     }}
                   >
                     {item.firstandlast}
+                   
                   </Grid>
+                  
                 ))}
               </Grid>
             </Grid>
-            <Grid   item xs={9}>
+            <Grid   item xs={8}>
               <div style={{wordWrap: "break-word"}}>
                 <br></br>
                 <br></br>
