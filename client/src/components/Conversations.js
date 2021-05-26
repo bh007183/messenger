@@ -11,7 +11,7 @@ export default function Conversations(props) {
   };
 
   return (
-    <Grid container>
+    // <Grid container>
       <Grid item xs={12}>
         <button
           onClick={handleClick}
@@ -48,14 +48,17 @@ export default function Conversations(props) {
                 ))}
               </Grid>
             </Grid>
-            <Grid item style={{verticalAlign: "middle"}} xs={9}>
-              <div className="textAlign" style={{ wordWrap: "break-word"}}>
-                <p>{props.recentMessage.substring(0, 50) + "..."}</p>
+            <Grid   item xs={9}>
+              <div style={{wordWrap: "break-word"}}>
+                <br></br>
+                <br></br>
+                
+                {props.recentMessage.substring(0, 50) + "..."}
               </div>
             </Grid>
           </Grid>
         </button>
       </Grid>
-    </Grid>
+    // </Grid>
   );
 }

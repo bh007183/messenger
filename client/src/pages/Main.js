@@ -26,7 +26,7 @@ console.log(convers)
       <br></br>
       <h3 style ={{textAlign:"center", color: "white"}}>Conversations</h3>
       
-      {/* <Grid container> */}
+      
         {convers ? (
           convers.slice(0).reverse().map((item, index) => (
             item.Messages.length ?  
@@ -36,7 +36,7 @@ console.log(convers)
         ) : (
           <p>You will need to add friends and then create a Conversation</p>
         )}
-      {/* </Grid> */}
+      
     </>
   );
 }

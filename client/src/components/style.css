@@ -92,7 +92,25 @@ textarea {
 
 
 
+@media only screen and (min-width: 600px) {
+  .MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiPaper-elevation16 {
+    /* right: 27%; */
+    /* position: absolute !important; */
+    right: calc(50% - 298px)
+    
+   
+  }
+}
+.MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiPaper-elevation16 {
+  background-color: brown;
   
+ 
+}
+
+.MuiDrawer-root{
+  position: absolute !important;
+  /* right: 27% !important; */
+}
 
 
 

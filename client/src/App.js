@@ -10,6 +10,8 @@ import AddContact from "./pages/AddContact"
 import CreateConversation from "./pages/CreateConversation"
 import Message from "./pages/Message"
 // import Test from "./components/Test"
+import Drawers from "./components/Drawer"
+
 
 
 
@@ -24,6 +26,7 @@ function App() {
     <Router>
       <Provider store={store}>
         <Container className="mainHeight" maxWidth="sm">
+        
           <NavBar />
           <Route exact path="/Main">
             <Main />
@@ -46,6 +49,7 @@ function App() {
           <Route exact path="/message">
             <Message />
           </Route>
+          <Drawers/>
         </Container>
       </Provider>
     </Router>
