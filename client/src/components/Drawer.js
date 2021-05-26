@@ -25,7 +25,7 @@ export default function Drawers(props) {
     <>
       <Drawer anchor={"right"} open={props.open} onClose={props.handleClose}>
         <div role="presentation" onClick={props.handleClose}>
-          <Divider />
+          
           <List>
             
             {/*  */}
@@ -39,6 +39,7 @@ export default function Drawers(props) {
                 <ListItemText primary={"Messages"}/>
               </Link>
               </ListItem>
+              <Divider />
 
               <ListItem button>
             <ListItemIcon>
@@ -50,6 +51,7 @@ export default function Drawers(props) {
                 <ListItemText primary={"Login"}/>
               </Link>
               </ListItem>
+              <Divider />
 
               <ListItem button onClick={logOut}>
             <ListItemIcon>
@@ -61,6 +63,7 @@ export default function Drawers(props) {
                 <ListItemText primary={"Logout"}/>
               
               </ListItem>
+              <Divider />
 
             
             

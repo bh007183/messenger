@@ -47,8 +47,7 @@ export default function CreateAccount() {
   return (
     <>
       <form onSubmit={submitHandler} className="formContainer">
-        <br></br>
-        <br></br>
+        
         {fail || success ? <Alerts fail={fail} success={success} /> : <></>}
         <div className="inputContainer">
           <input

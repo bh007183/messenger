@@ -83,6 +83,7 @@ textarea {
 .modal{
   max-width: 500px;
   min-height: 70vh;
+  min-width: 225px;
   background-color: #557A95;
   position: absolute;
   top: 50%;
@@ -102,7 +103,7 @@ textarea {
   }
 }
 .MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiPaper-elevation16 {
-  background-color: brown;
+  background-color: #557A95;
   
  
 }

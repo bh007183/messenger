@@ -20,18 +20,8 @@ export default function Conversations(props) {
         >
           <Grid className="conversationContain" container>
             <Grid item xs={3}>
-              <Grid
-                item
-                xs={12}
-                style={{
-                  fontSize: "11px",
-                  color: "white",
-                  textAlign: "center",
-                  margin: "2px",
-                }}
-              >
-                <h5>Participants</h5>
-              </Grid>
+              <br></br>
+              
               <Grid container>
                 {props.participants.map((item) => (
                   <Grid

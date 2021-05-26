@@ -16,8 +16,8 @@ let socket;
 
 export default function Message() {
   const scrollTo = useRef(null);
-  const executeScroll = () =>
-    scrollTo.current.scrollIntoView({ behavior: "smooth" });
+  
+    
   const dispatch = useDispatch();
   const conversation = useSelector(
     (state) => state.store.Conversation.ConversationCreated.ConversationId
@@ -29,7 +29,7 @@ export default function Message() {
     const fail = useSelector((state) => state.store.Message.Error)
 
   useEffect(() => {
-    executeScroll();
+    
     socket = io.connect("http://localhost:8080", {
       path: `/messageRelay`,
       extraHeaders: {
@@ -80,6 +80,10 @@ export default function Message() {
       [name]: value,
     });
   };
+
+  useEffect(() => {
+    scrollTo.current.scrollIntoView({ behavior: "smooth" });
+  }, [messages])
 
   const messageSend = (event) => {
     setSendMessage({
