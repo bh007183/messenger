@@ -49,7 +49,7 @@ function App() {
           <Route exact path="/message">
             <Message />
           </Route>
-          <Drawers/>
+          
         </Container>
       </Provider>
     </Router>

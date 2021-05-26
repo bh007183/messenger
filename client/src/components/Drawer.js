@@ -1,56 +1,82 @@
 import React from "react";
-import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
+
+import { Link } from "react-router-dom";
+
 import Drawer from "@material-ui/core/Drawer";
-import Button from "@material-ui/core/Button";
+
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
-import "./style.css"
+import LockIcon from '@material-ui/icons/Lock';
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import ForumIcon from '@material-ui/icons/Forum';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import "./style.css";
 
-export default function Drawers() {
-  const [state, setState] = React.useState({
-    right: false,
-  });
-
-  const toggleDrawer = (anchor, open) => (event) => {
-    setState({ ...state, [anchor]: open });
+export default function Drawers(props) {
+  const logOut = () => {
+    localStorage.clear();
+    window.location.href = "/";
   };
-
-  
 
   return (
     <>
-      <Button onClick={toggleDrawer("right", true)}>{"right"}</Button>
-      <Drawer
-        anchor={"right"}
-        open={state["right"]}
-        onClose={toggleDrawer("right", false)}
-        
-      
-        
-      >
-        <div role="presentation" onClick={toggleDrawer("right", false)}>
+      <Drawer anchor={"right"} open={props.open} onClose={props.handleClose}>
+        <div role="presentation" onClick={props.handleClose}>
           <Divider />
           <List>
+            
+            {/*  */}
             <ListItem button>
-              <ListItemIcon>
-                {" "}
-                <InboxIcon />{" "}
-              </ListItemIcon>
-              <ListItemText primary={"uouo"} />
-            </ListItem>
+            <ListItemIcon>
+                <Link style={{ textDecoration: 'none', color:"black" }} to="/main">
+                <ForumIcon style={{ color: "black" }}/>
+                </Link>
+                </ListItemIcon>
+                <Link style={{ textDecoration: 'none', color:"black" }} to="/main">
+                <ListItemText primary={"Messages"}/>
+              </Link>
+              </ListItem>
+
+              <ListItem button>
+            <ListItemIcon>
+                <Link style={{ textDecoration: 'none', color:"black" }} to="/">
+                <LockOpenIcon style={{ color: "black" }}/>
+                </Link>
+                </ListItemIcon>
+                <Link style={{ textDecoration: 'none', color:"black" }} to="/">
+                <ListItemText primary={"Login"}/>
+              </Link>
+              </ListItem>
+
+              <ListItem button onClick={logOut}>
+            <ListItemIcon>
+                
+                <LockIcon style={{ color: "black" }}/>
+                
+                </ListItemIcon>
+                
+                <ListItemText primary={"Logout"}/>
+              
+              </ListItem>
+
+            
+            
             <ListItem button>
-              <ListItemIcon>
-                {" "}
-                <MailIcon />{" "}
-              </ListItemIcon>
-              <ListItemText primary={"uouo"} />
+                
+             
+                <ListItemIcon>
+                <Link style={{ textDecoration: 'none', color:"black"}} to="/AddContact">
+                <PersonAddIcon style={{ color: "black" }}/>
+                </Link>
+                </ListItemIcon>
+                <Link  style={{ textDecoration: 'none', color:"black"}}to="/AddContact">
+                <ListItemText primary={"Add Friend"}/>
+              </Link>
             </ListItem>
+            {/*  */}
           </List>
         </div>
       </Drawer>
