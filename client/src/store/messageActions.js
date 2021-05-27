@@ -52,7 +52,7 @@ export default slice.reducer;
 
 export const getAllMessages = () =>
   apiCallBegan({
-    url: `http://localhost:8080/api/getAllMessages`,
+    url: `https://messenger-improved-bjh.herokuapp.com/api/getAllMessages`,
     headers: { authorization: "Bearer: " + localStorage.getItem("token") },
     method: "GET",
     onSuccess: setMessages.type,
@@ -61,7 +61,7 @@ export const getAllMessages = () =>
 
 export const sendMessageAPI = (data) =>
   apiCallBegan({
-    url: `http://localhost:8080/api/sendMessage`,
+    url: `https://messenger-improved-bjh.herokuapp.com/api/sendMessage`,
     headers: { authorization: "Bearer: " + localStorage.getItem("token") },
     data: data,
     method: "POST",
@@ -70,7 +70,7 @@ export const sendMessageAPI = (data) =>
   });
 export const getSpecificMessages = (id) =>
   apiCallBegan({
-    url: `http://localhost:8080/api/getSpecificConversation/${id}`,
+    url: `https://messenger-improved-bjh.herokuapp.com/api/getSpecificConversation/${id}`,
     headers: { authorization: "Bearer: " + localStorage.getItem("token") },
     method: "GET",
     onSuccess: setMessages.type,
@@ -79,7 +79,7 @@ export const getSpecificMessages = (id) =>
 
   export const addMessagePartAPI = (Participent) =>
   apiCallBegan({
-    url: `http://localhost:8080/api/addMessagePart`,
+    url: `https://messenger-improved-bjh.herokuapp.com/api/addMessagePart`,
     headers: { authorization: "Bearer: " + localStorage.getItem("token") },
     data: Participent,
     method: "POST",

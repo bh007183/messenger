@@ -19,11 +19,11 @@ app.use(express.json());
 
 
 
-// var corsOptions = {
-//   origin: 'https://messenger-improved-bjh.herokuapp.com'
-// }
+var corsOptions = {
+  origin: 'https://messenger-improved-bjh.herokuapp.com'
+}
 // corsOptions
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Static directory
 
@@ -44,7 +44,7 @@ app.use(conversationRouter);
 // Sockets
 const io = require("socket.io")(server, {
   cors: {
-    origin: "*",
+    origin: "https://messenger-improved-bjh.herokuapp.com",
   },
   path: "/messageRelay",
 });
@@ -140,8 +140,8 @@ io.on("connection", async (socket) => {
   app.use(express.static("client/build"));
 // }
 
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client/build/index.html"));
   console.log(__dirname, "../client/build/index.html");
 });
 // db.sequelize.query('SET FOREIGN_KEY_CHECKS = 0')
