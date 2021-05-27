@@ -30,7 +30,7 @@ export default function Message() {
 
   useEffect(() => {
     
-    socket = io.connect("https://messenger-improved-bjh.herokuapp.com", {
+    socket = io.connect("http//localhost:8080", {
       path: `/messageRelay`,
       extraHeaders: {
         authorization: "Bearer: " + localStorage.getItem("token"),

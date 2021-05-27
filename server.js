@@ -17,15 +17,13 @@ var PORT = process.env.PORT || 8080;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
 
-var corsOptions = {
-  origin: 'https://messenger-improved-bjh.herokuapp.com'
-}
+
+// var corsOptions = {
+//   origin: 'https://messenger-improved-bjh.herokuapp.com'
+// }
 // corsOptions
-app.use(cors(corsOptions));
+app.use(cors());
 
 // Static directory
 
@@ -46,7 +44,7 @@ app.use(conversationRouter);
 // Sockets
 const io = require("socket.io")(server, {
   cors: {
-    origin: "https://messenger-improved-bjh.herokuapp.com",
+    origin: "*",
   },
   path: "/messageRelay",
 });
@@ -137,6 +135,10 @@ io.on("connection", async (socket) => {
     }
   }
 });
+
+// if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+// }
 
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
