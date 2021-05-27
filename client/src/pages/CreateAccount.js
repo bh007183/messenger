@@ -36,7 +36,14 @@ export default function CreateAccount() {
       dispatch(setError({data: "Passwords Do Not Match"}))
     }
 
-    
+    setLogin({
+      username: "",
+    firstandlast: "",
+    password: "",
+    verifyPassword: "",
+    email: "",
+    image: ""
+    })
   };
 
   useEffect(() => {

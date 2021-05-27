@@ -92,6 +92,12 @@ export default function Message() {
     });
     dispatch(sendMessageAPI(sendMessage));
     socket.send(JSON.stringify(sendMessage));
+
+    setSendMessage({
+      ...sendMessage,
+      message: "",
+    });
+
   };
 
   // modal handler

@@ -35,6 +35,11 @@ export default function Login() {
   const handelSubmit = (event) => {
       event.preventDefault();
       dispatch(loginAccount(Login));
+
+      setLogin({
+        username: "",
+        password: "",
+      })
   }
   useEffect(() => {
     if(fail !== ""){
