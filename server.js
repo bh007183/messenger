@@ -20,11 +20,11 @@ app.use(express.json());
 
 
 
-var corsOptions = {
-  origin: 'https://messenger-improved-bjh.herokuapp.com'
-}
+// var corsOptions = {
+//   origin: 'https://messenger-improved-bjh.herokuapp.com'
+// }
 // corsOptions
-app.use(cors(corsOptions));
+app.use(cors());
 
 // Static directory
 
@@ -45,7 +45,7 @@ app.use(conversationRouter);
 // Sockets
 const io = require("socket.io")(server, {
   cors: {
-    origin: "https://messenger-improved-bjh.herokuapp.com",
+    origin: "*",
   },
   path: "/messageRelay",
 });
