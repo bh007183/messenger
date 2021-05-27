@@ -78,13 +78,13 @@ export const loginAccount = (user) => apiCallBegan({
     onSuccess: loginSuccess.type,
     onError: setError.type,
 })
-
+// 
 export const findFriends = (username) => apiCallBegan({
     url: `http://localhost:8080/api/findFriends/${username}`,
     headers: {authorization: "Bearer: " + localStorage.getItem("token")},
     method: "GET",
     onSuccess: possibleFrinedMatch.type,
-    // onError: setError.type,
+    onError: setError.type,
 })
 export const addFriends = (FriendId) => apiCallBegan({
     url: `http://localhost:8080/api/addFriend`,
@@ -103,7 +103,7 @@ export const getFriends = () => apiCallBegan({
     onSuccess: setFriends.type,
     onError: setError.type,
 })
-
+// 
 export const searchCurrentFriends = (firstandlast) => apiCallBegan({
     url: `http://localhost:8080/api/searchCurrentFriends/${firstandlast}`,
     headers: {authorization: "Bearer: " + localStorage.getItem("token")},

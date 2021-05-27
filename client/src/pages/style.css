@@ -36,6 +36,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 20px 20px 1px 1px;
 
 }
 
@@ -44,6 +45,7 @@
   width: 100%;
   margin-top: 6px;
   background-color: #557a95;
+  border-radius: 20px 20px 20px 20px;
 
 }
 .possibleFriendResultButtonAddContact{
@@ -52,6 +54,7 @@
   margin-top: 6px;
   display: flex;
   background-color: #B1A296;
+  border-radius: 10px 10px 10px 10px;
 }
 .possibleFriendResultAddContact{
   background-color: #B1A296;
@@ -59,7 +62,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
+  border-radius: 10px 10px 10px 10px;
 }
 
 
@@ -73,10 +76,13 @@
   aspect-ratio: 5 / 5;
   background-position: center;
   border-radius: 100%;
-  
-
-  
 }
+
+
+
+
+
+
 .friendImageMessage{
   
   object-fit: cover;
@@ -94,6 +100,12 @@
   height: 60px;
   margin-right: 3px;
   margin-left: 3px
+}
+.CurrentFriendImageConatiner{
+  width: 90px;
+  height: 90px;
+  
+
 }
 
 .startConversationBtn{

@@ -10,7 +10,7 @@ const slice = createSlice({
       Redirect: false,
       ConversationId: "",
     },
-    ConversationCreatedError: "",
+    Error: "",
   },
 
   reducers: {
@@ -30,9 +30,13 @@ const slice = createSlice({
       Conversation.ConversationCreated.Redirect = false;
     },
 
-    errorConversCreated: (Conversation) => {
-      Conversation.ConversationCreatedError =
-        "A Conversation was unable to be created at this time!";
+    setError: (Conversation, action) => {
+      Conversation.Error = action.payload.data
+        
+    },
+    clearError: (Conversation, action) => {
+      Conversation.Error = ""
+        
     },
     setConversationId: (Conversation, action) => {
       Conversation.ConversationCreated.ConversationId = action.payload;
@@ -46,7 +50,8 @@ export const {
   setConversations,
   initialSetConversParticipants,
   successConversCreated,
-  errorConversCreated,
+  setError,
+  clearError,
   setConversationId,
   Redirect,
   resetRedirect
@@ -59,7 +64,7 @@ export const getAllConversations = () =>
     headers: { authorization: "Bearer: " + localStorage.getItem("token") },
     method: "GET",
     onSuccess: setConversations.type,
-    // onError: console.log(action.payload)
+    onError: setError.type
   });
 
 export const createConversationAPI = (Participents) =>
@@ -69,7 +74,7 @@ export const createConversationAPI = (Participents) =>
     data: Participents,
     method: "POST",
     onSuccess: successConversCreated.type,
-    onError: errorConversCreated.type,
+    onError: setError.type,
   });
 
 

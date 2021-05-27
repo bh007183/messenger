@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import "./style.css";
-import { createAccountAPI, resetErrorSuccess } from "../store/userActions";
+import { createAccountAPI, resetErrorSuccess, setError } from "../store/userActions";
 import Alerts from "../components/Alerts";
 
 export default function CreateAccount() {
@@ -15,6 +15,7 @@ export default function CreateAccount() {
     password: "",
     verifyPassword: "",
     email: "",
+    image: ""
   });
 
   const handleChange = (event) => {
@@ -31,24 +32,47 @@ export default function CreateAccount() {
 
     if (Login.password === Login.verifyPassword) {
       dispatch(createAccountAPI(Login));
+    }else{
+      dispatch(setError({data: "Passwords Do Not Match"}))
     }
 
+    
+  };
+
+  useEffect(() => {
     setTimeout(() => {
-      if (success === "") {
+      if (success !== "") {
         dispatch(resetErrorSuccess(""));
         window.location.href = "/";
       }
-      if (fail === "") {
+      if (fail !== "") {
         dispatch(resetErrorSuccess(""));
       }
     }, 3000);
-  };
+  }, [fail, success])
+
+  var widget = window.cloudinary.createUploadWidget({
+    cloudName: process.env.REACT_APP_COUDNAME,
+      uploadPreset: process.env.REACT_APP_COUDPRESET}, (error, result) => { 
+      if (!error && result && result.event === "success") { 
+        setLogin({ ...Login, image: result.info.url })
+      }
+    }
+  )
+  
+  const handleImageUpload = (event) => {
+    event.preventDefault()
+    widget.open()
+  }
+ 
 
   return (
     <>
       <form onSubmit={submitHandler} className="formContainer">
-        
-        {fail || success ? <Alerts fail={fail} success={success} /> : <></>}
+      
+         <Alerts fail={fail} success={success} />
+         <br></br>
+         <br></br>
         <div className="inputContainer">
           <input
             onChange={handleChange}
@@ -58,6 +82,7 @@ export default function CreateAccount() {
           ></input>
         </div>
         <br></br>
+        
         <br></br>
         <div className="inputContainer">
           <input
@@ -72,6 +97,7 @@ export default function CreateAccount() {
         <div className="inputContainer">
           <input
             onChange={handleChange}
+            type="password"
             name="password"
             value={Login.password}
             placeholder="Password"
@@ -81,6 +107,7 @@ export default function CreateAccount() {
         <br></br>
         <div className="inputContainer">
           <input
+          type="password"
             onChange={handleChange}
             name="verifyPassword"
             value={Login.verifyPassword}
@@ -100,11 +127,17 @@ export default function CreateAccount() {
         <br></br>
         <br></br>
         <div className="inputContainer">
+        <button type="click" id="upload_widget" onClick={handleImageUpload} >Add Photo</button>
+        </div>
+        <br></br>
+        <br></br>
+        <div className="inputContainer">
           <button type="submit">CreateAccount</button>
         </div>
         <br></br>
         <br></br>
       </form>
+      
     </>
   );
 }

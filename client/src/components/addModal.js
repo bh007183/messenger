@@ -89,7 +89,7 @@ export default function AddModal(props) {
      <>
        <button onClick={addPart} value={friend.id} className="possibleFriendResultButtonAddContact">
        <Grid style={{height: "50px"}} item xs={4}>
-         <img style={{height: "50px"}} src="https://placedog.net/500" alt="Profile Pic"></img>
+         <img style={{height: "50px"}} src={friend.image} alt="Profile Pic"></img>
        </Grid>
        <Grid style={{height: "50px", display: "flex", justifyContent: "center", alignItems: 'center'}} item xs={8}>
          {friend.firstandlast}

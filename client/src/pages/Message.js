@@ -122,17 +122,20 @@ export default function Message() {
         style={{
           width: "100%",
           overflow: "scroll",
-          background: "#7395AE",
+          backdropFilter: "blur(6px)",
+          opacity: "1",
+          background: "rgba(51, 164, 216, 0.3)",
           display: "flex",
         }}
+        
       >
         {Participants.map((Part, index) => (
-          <ParticipantBar name={Part.firstandlast} key={index} />
+          <ParticipantBar name={Part.firstandlast} image={Part.image} key={index} />
         ))}
       </div>
      
       </Grid>
-      <Grid style={{display: "flex",background: "#7395AE", justifyContent:"center", alignItems: "center"}} item xs={1}>
+      <Grid style={{display: "flex", backdropFilter: "blur(6px)", background: "rgba(51, 164, 216, 0.3)", justifyContent:"center", alignItems: "center"}} item xs={1}>
       <IconButton style={{background: "#557A95"}} size="small" onClick={GetFriends}>
         <AddIcon></AddIcon>
 

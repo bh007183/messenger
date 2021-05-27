@@ -55,7 +55,7 @@ const users = [];
 io.on("connection", async (socket) => {
 
   const socketErr = () =>{
-    socket.emit("error", "There is an issue with live connection, Please re-login. If issue persists you likely do not have permission to join live conversation")
+    socket.emit("error","live connectivity issue.")
     socket.disconnect()
   }
 
@@ -84,14 +84,16 @@ io.on("connection", async (socket) => {
         },
       }).catch((err) =>  console.log("bastered 84"));
       let assoc = await results.getConversations().catch((err) =>  console.log("bastered 86") )
-
+      
       socket.on("create", function (room) {
         
         for (let i = 0; i < assoc.length; i++) {
         
           if (assoc[i].id === parseInt(room)) {
+
             socket.join(room);
-            console.log(io.sockets.adapter.rooms.get(room));
+            console.log(io.sockets.adapter.rooms);
+           
             break;
           }
         }

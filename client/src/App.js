@@ -11,6 +11,7 @@ import CreateConversation from "./pages/CreateConversation"
 import Message from "./pages/Message"
 // import Test from "./components/Test"
 import Drawers from "./components/Drawer"
+import Upload from "./pages/Upload"
 
 
 
@@ -48,6 +49,9 @@ function App() {
           </Route>
           <Route exact path="/message">
             <Message />
+          </Route>
+          <Route exact path="/upload">
+            <Upload />
           </Route>
           
         </Container>

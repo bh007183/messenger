@@ -14,7 +14,8 @@ router.post("/api/createUser", async (req, res) => {
     username: req.body.username,
     email: req.body.email,
     password: hashPass,
-  }).catch((err) => res.status(409).send("Failed. Please check to make sure you have a valid email, no empty fields and if that is all good then try a different username.").end());
+    image: req.body.image
+  }).catch((err) => {if(err.errors[0].message.substring(0, 6) === "users."){res.status(409).send(err.errors[0].message.substring(6))} else{res.status(409).send("invalid email")} })
 
   res.status(200).send("Account Created!");
 });
@@ -25,29 +26,33 @@ router.post("/login", async (req, res) => {
     where: {
       username: req.body.username,
     },
-  }).catch((err) => res.status(409).send(err));
+  }).catch((err) => res.status(409).send("No Known User!"));
 
-  const match = await bcrypt.compareSync(req.body.password, data.password);
-
-  if (match) {
-    jwt.sign(
-      {
-        username: data.username,
-        id: data.id,
-        firstandlast: data.firstandlast
-      },
-      process.env.JWS_TOKEN,
-      { expiresIn: "1hr" },
-      (err, token) => {
-        if (err) {
-          res.status(401).send("Error connecting token");
+  try{
+    const match = await bcrypt.compareSync(req.body.password, data.password)
+    if (match) {
+      jwt.sign(
+        {
+          username: data.username,
+          id: data.id,
+          firstandlast: data.firstandlast
+        },
+        process.env.JWS_TOKEN,
+        { expiresIn: "1hr" },
+        (err, token) => {
+          if (err) {
+            res.status(401).send("Error connecting token. Try again.");
+          }
+  
+          res.json({ token, user: data.firstandlast, id: data.id });
         }
-
-        res.json({ token, user: data.firstandlast, id: data.id });
-      }
-    );
-  } else {
-    res.status(401).send("No Such User!");
+      );
+    } else {
+      res.status(401).send("No Such User!");
+    }
+  
+  }catch(err){
+    res.status(401).send("Invalid Credientials, Please try again or create an account.")
   }
 });
 // search for connection
@@ -61,11 +66,11 @@ router.get("/api/findFriends/:name", async (req, res) => {
     token = req.headers.authorization.split(" ")[1];
   }
   if (!token) {
-    res.status(500);
+    res.status(500).send("Please Login");
   } else {
     const data = await jwt.verify(token, process.env.JWS_TOKEN, (err, data) => {
       if (err) {
-        res.status(403).end();
+        res.status(403).send("Session Expired. Please Login.");
       } else {
         return data;
       }
@@ -89,11 +94,11 @@ router.get("/api/findFriends/:name", async (req, res) => {
             "username",
           ],
         },
-      }).catch((err) => res.json(err));
+      }).catch((err) => res.status(401).send("Issue finding friends. "));
       
       res.status(200).json(returnedData);
     } else {
-      res.status(403);
+      res.status(403).send("Session Expired. Please Login.");
     }
   }
 });
@@ -111,7 +116,7 @@ router.put("/api/addFriend", async (req, res) => {
     token = req.headers.authorization.split(" ")[1];
   }
   if (!token) {
-    res.status(500);
+    res.status(500).send("Please Login.");
   } else {
     const data = await jwt.verify(token, process.env.JWS_TOKEN, (err, data) => {
       if (err) {
@@ -126,7 +131,7 @@ router.put("/api/addFriend", async (req, res) => {
         where: {
           id: data.id,
         },
-      }).catch((err) => res.json(err));
+      }).catch((err) => res.status(401).send("Authentication issue, Please Login."));
       await returnedData.addFriend(req.body.id).catch(err => res.status(403).json('Already a friend.'))
         res.status(200).json(`Connection Added!`);
     } else {
@@ -150,7 +155,7 @@ router.get("/api/getFriends", async (req, res) => {
   } else {
     const data = await jwt.verify(token, process.env.JWS_TOKEN, (err, data) => {
       if (err) {
-        res.status(403).send("Authorization issue, create an account or Please Login").end();
+        res.status(403).send("Session Expired. Please Login").end();
       } else {
         return data;
       }
@@ -160,7 +165,7 @@ router.get("/api/getFriends", async (req, res) => {
         where: {
           id: data.id,
         },
-      }).catch((err) => res.send("Issue retrieving current friends"));
+      }).catch((err) => res.status(401).send("Validation expired"));
 
 
       let returnFriends = await returnedData.getFriends({attributes: {
@@ -172,10 +177,10 @@ router.get("/api/getFriends", async (req, res) => {
           "updatedAt",
           "username",
         ],
-      }})
+      }}).catch(err => res.status(401).send("Issue retrieving friends"))
       res.status(200).json(returnFriends)
     } else {
-      res.status(403);
+      res.status(403).send("Session Expired. Please Login");
     }
   }
 });
@@ -191,11 +196,11 @@ router.get("/api/searchCurrentFriends/:name", async (req, res) => {
     token = req.headers.authorization.split(" ")[1];
   }
   if (!token) {
-    res.status(500);
+    res.status(500).send("Please Login");
   } else {
     const data = await jwt.verify(token, process.env.JWS_TOKEN, (err, data) => {
       if (err) {
-        res.status(403).end();
+        res.status(403).send("Session Expired. Please Login").end();
       } else {
         return data;
       }
@@ -205,7 +210,7 @@ router.get("/api/searchCurrentFriends/:name", async (req, res) => {
         where: {
           id: data.id,
         }
-      }).catch((err) => res.json(err));
+      }).catch((err) => res.status(404).send("Validation Issue"));
 
 
       let returnFriends = await returnedData.getFriends({
@@ -223,11 +228,11 @@ router.get("/api/searchCurrentFriends/:name", async (req, res) => {
           "updatedAt",
           "username",
         ],
-      }})
+      }}).catch((err) => res.status(404).send("Issue Finding Friends"))
      
       res.status(200).json(returnFriends)
     } else {
-      res.status(403);
+      res.status(403).send("Session Expired");
     }
   }
 });

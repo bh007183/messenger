@@ -5,7 +5,8 @@ export default function ParticipantBar(props) {
     <div  className="friendImageMessageContainer">
       <div
         style={{
-          backgroundImage: `url("http://placekitten.com/200/300")`,
+          backgroundImage: `url(${props.image})`,
+          backgroundSize: "contain",
         }}
         className="friendImageMessage"
       >

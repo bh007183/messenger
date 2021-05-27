@@ -59,13 +59,17 @@ export default function AddContact() {
           <button className="findFriendButton" onClick={handleSearch}>Search</button>
         </Grid>
         <Grid item xs={1}></Grid>
-        <br></br>
-        {fail || success ? <Alerts fail={fail} success={success} /> : <></>}
-        <br></br>
-        <br></br>
-        <br></br>
+        
         <Grid item xs={12}>
-          <h6 style={{ textAlign: "center", color: "white" }}>Results</h6>
+          <br style={{hight: '1px'}}/>
+          
+          
+          <Alerts fail={fail} success={success} /></Grid>
+        
+        
+        
+        <Grid item xs={12}>
+          <h6 style={{ textAlign: "center", color: "white", marginTop:"5px", marginBottom:"5px" }}>Results</h6>
         </Grid>
 
         {results.length > 0 && results[0] !== "empty" ? (
@@ -80,7 +84,8 @@ export default function AddContact() {
                   <div className="friendImageMessageContainer">
                   <div
                     style={{
-                      backgroundImage: `url("http://placekitten.com/200/300")`,
+                      backgroundImage: `url(${person.image})`,
+                      backgroundSize: "contain",
                     }}
                     className="friendImage"
                   >

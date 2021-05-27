@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 import {Link} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
 import {loginAccount} from "../store/userActions"
 import {Redirect} from "react-router-dom"
+import Alert from "../components/Alerts"
+import {resetErrorSuccess} from "../store/userActions"
 
 export default function Login() {
 
   const dispatch = useDispatch()
   const userState = useSelector(state => state.store.User.YourName)
+  const fail = useSelector(state => state.store.User.Error)
 
 
   const [Login, setLogin] = useState({
@@ -32,19 +35,24 @@ export default function Login() {
   const handelSubmit = (event) => {
       event.preventDefault();
       dispatch(loginAccount(Login));
-      
-     
-
-
   }
+  useEffect(() => {
+    if(fail !== ""){
+      setTimeout(() => {
+        dispatch(resetErrorSuccess(""))
+      }, 4000);
+    }
+  }, [fail])
 
   
 
   return (
     <>
     {userState !== "" ? <Redirect to="/main"/> : <></>}
+    
       <form onSubmit={handelSubmit} className="formContainer">
         <br></br>
+        <Alert fail={fail}/>
         <br></br>
         <div className="inputContainer">
           <input
@@ -60,6 +68,7 @@ export default function Login() {
           <input
             onChange={handleChange}
             name="password"
+            type="password"
             value={Login.password}
             placeholder="Password"
           ></input>

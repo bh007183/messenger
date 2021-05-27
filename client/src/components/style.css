@@ -7,13 +7,13 @@
   max-width: 600px;
   position: fixed;
   top: 0%;
-  background-color: #5D5C61;
+  background-color: #5d5c61;
 }
 .MessageBar {
   position: fixed;
   bottom: 0;
   max-width: 600px;
-  background-color: #5D5C61;
+  background-color: #5d5c61;
 }
 
 .conversationToken {
@@ -42,14 +42,15 @@ textarea {
   width: 100%;
   display: flex;
   margin-top: 5px;
-  
 }
-.conversationContain{
+.conversationContain {
   background-color: #007685;
   height: 100px;
-  border-radius: 20px 20px 1px 1px
+  
+  border-radius: 20px 20px 1px 1px;
+  
 }
-.textAlign{
+.textAlign {
   height: 100%;
   display: flex;
   justify-content: center;
@@ -66,29 +67,31 @@ textarea {
   width: 100vw;
   background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4XodTtOKcW-NXRd8WRZXGGt4Cdvt_MjewsHliXd1xlrJkZdiypdVGMmZyA_how_zIw0Q&usqp=CAU");
   background-size: cover;
-  
- 
 }
 .background .water {
-    position: absolute;
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4XodTtOKcW-NXRd8WRZXGGt4Cdvt_MjewsHliXd1xlrJkZdiypdVGMmZyA_how_zIw0Q&usqp=CAU");
-    background-size: cover;
-    top: 0px;
-    left:0;
-    height: 100%;
-    width: 100%;
-    filter: url("#turbulence");
-    
-  }
-.modal{
+  position: absolute;
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4XodTtOKcW-NXRd8WRZXGGt4Cdvt_MjewsHliXd1xlrJkZdiypdVGMmZyA_how_zIw0Q&usqp=CAU");
+  background-size: cover;
+  top: 0px;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  filter: url("#turbulence");
+}
+.modal {
   max-width: 500px;
   min-height: 70vh;
   min-width: 225px;
-  background-color: #557A95;
+  background-color: #557a95;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+
+.hold{
+  background: rgba(51, 164, 216, 0.651),
 }
 
 
@@ -97,21 +100,15 @@ textarea {
   .MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiPaper-elevation16 {
     /* right: 27%; */
     /* position: absolute !important; */
-    right: calc(50% - 298px)
+    right: calc(50% - 298px);
     
-   
   }
 }
 .MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiPaper-elevation16 {
-  background-color: #557A95;
-  
- 
+  background-color: #557a95;
 }
 
-.MuiDrawer-root{
+.MuiDrawer-root {
   position: absolute !important;
   /* right: 27% !important; */
 }
-
-
-

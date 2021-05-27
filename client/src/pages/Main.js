@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import { Redirect } from "react-router-dom";
+import {clearError} from "../store/conversationActions"
+import Alert from "../components/Alerts"
 
 import Conversations from "../components/Conversations";
 
@@ -15,17 +17,26 @@ export default function Main() {
   const convers = useSelector(
     (state) => state.store.Conversation.Conversations.Conversations
   );
+  const fail = useSelector(
+    (state) => state.store.Conversation.Error
+  );
 console.log(convers)
   useEffect(() => {
     dispatch(getAllConversations());
-  }, []);
+
+    if(fail !== ""){
+      setTimeout(() => {
+        dispatch(clearError())
+      }, 5000);
+    }
+  }, [fail]);
   return (
     <>
       {RedirectControl !== false ? <Redirect push to="/message" /> : <></>}
       <br></br>
       <br></br>
       <h3 style ={{textAlign:"center", color: "white"}}>Conversations</h3>
-      
+      <Alert fail={fail}/>
       
         {convers ? (
           convers.slice(0).reverse().map((item, index) => (

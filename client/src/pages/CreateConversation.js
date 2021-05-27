@@ -8,6 +8,8 @@ import {
 } from "../store/conversationActions";
 import { Redirect } from "react-router-dom";
 import { searchCurrentFriends } from "../store/userActions";
+import Alert from "../components/Alerts"
+
 
 export default function CreateConversation() {
   const dispatch = useDispatch();
@@ -21,6 +23,15 @@ export default function CreateConversation() {
   const searchedFriends = useSelector(
     (state) => state.store.User.SearchedFriends
   );
+
+  const createConverseFail = useSelector(
+    (state) => state.store.Conversation.Error
+  );
+
+  const friendFail = useSelector(
+    (state) => state.store.User.Error
+  );
+
   const [findFriend, setFindFriend] = useState({
     firstName: "",
   });
@@ -74,6 +85,7 @@ export default function CreateConversation() {
       <br></br>
       <Grid item xs={12}>
         <h6 style={{ textAlign: "center", color: "white" }}>Friends</h6>
+        <Alert fail={createConverseFail || friendFail }/>
       </Grid>
       {searchedFriends.map((friend) => (
         <>
@@ -88,7 +100,7 @@ export default function CreateConversation() {
             <Grid style={{ height: "40px" }} item xs={4}>
               <img
                 style={{ height: "40px" }}
-                src="https://placedog.net/500"
+                src={friend.image}
                 alt="Profile Pic"
               ></img>
             </Grid>
@@ -107,11 +119,12 @@ export default function CreateConversation() {
             <Grid key={index} item xs={2}>
               <div
                 style={{
-                  backgroundImage: `url("http://placekitten.com/200/300")`,
+                  backgroundImage: `url(${Part.image})`,
+                  backgroundSize: "contain",
                 }}
                 className="friendImage"
               >
-                <p className="whiteText">{Part.name}</p>
+                <p className="whiteText" style={{fontSize: ".5rem"}}>{Part.name}</p>
               </div>
             </Grid>
           ))}
@@ -128,10 +141,12 @@ export default function CreateConversation() {
         <></>
       )}
       <Grid item xs={12}>
-        <Grid container spacing={2} className="FriendsContainer">
+        <Grid container  className="FriendsContainer">
           {Friends.length > 0 ? (
             Friends.map((person) => (
-              <Grid item xs={6}>
+              <>
+              
+              <Grid item style={{marginLeft:"4.8%",marginRight:"2%" }} xs={5}>
                 <button
                   key={person.id}
                   onClick={AddTo}
@@ -139,15 +154,18 @@ export default function CreateConversation() {
                     (addtoconvers = {
                       id: person.id,
                       name: person.firstandlast,
+                      image: person.image
                     })
                   )}
                   className="possibleFriendResultButton"
                 >
                   <div className="possibleFriendResult">
-                    <div className="friendImageMessageContainer">
+                    <div className="CurrentFriendImageConatiner">
                       <div
                         style={{
-                          backgroundImage: `url("http://placekitten.com/200/300")`,
+                          backgroundSize: "contain",
+                          backgroundImage: `url(${person.image})`,
+                          
                         }}
                         className="friendImage"
                       ></div>
@@ -155,11 +173,11 @@ export default function CreateConversation() {
                   </div>
                   <p style={{ textAlign: "center" }}>{person.firstandlast}</p>
 
-                  {/* <Grid className="possibleFriendResult" item xs={9}>
-                {person.firstandlast}
-              </Grid> */}
+                  
                 </button>
               </Grid>
+              
+              </>
             ))
           ) : (
             <></>
