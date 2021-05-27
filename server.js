@@ -138,7 +138,7 @@ io.on("connection", async (socket) => {
   }
 });
 
-app.get("/", (req, res) => {
+app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
   console.log(__dirname, "../client/build/index.html");
 });
