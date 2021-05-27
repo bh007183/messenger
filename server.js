@@ -142,7 +142,7 @@ io.on("connection", async (socket) => {
 // }
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+  res.sendFile(path.join(__dirname, "/client/build/index.html"));
   console.log(__dirname, "../client/build/index.html");
 });
 // db.sequelize.query('SET FOREIGN_KEY_CHECKS = 0')
