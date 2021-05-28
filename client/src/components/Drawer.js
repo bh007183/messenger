@@ -13,6 +13,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import ForumIcon from '@material-ui/icons/Forum';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import "./style.css";
 
 export default function Drawers(props) {
@@ -80,6 +81,18 @@ export default function Drawers(props) {
               </Link>
             </ListItem>
             {/*  */}
+            <ListItem button>
+                
+             
+                <ListItemIcon>
+                <Link style={{ textDecoration: 'none', color:"black"}} to="/manageAccount">
+                <AccountBoxIcon style={{ color: "black" }}/>
+                </Link>
+                </ListItemIcon>
+                <Link  style={{ textDecoration: 'none', color:"black"}}to="/manageAccount">
+                <ListItemText primary={"Edit Account Info"}/>
+              </Link>
+            </ListItem>
           </List>
         </div>
       </Drawer>

@@ -10,7 +10,8 @@ const slice = createSlice({
         SearchedFriends: [],
         PossibleFriends: [],
         Success: "",
-        Error: ""
+        Error: "",
+        user: {}
 
     },
     reducers: {
@@ -50,16 +51,19 @@ const slice = createSlice({
            
         },
         noSetSearched: (User, action) => {
-           
             User.SearchedFriends = []
-           
+        },
+
+        setManageAccount: (User, action) => {
+            User.user = action.payload
         }
+
 
     }
 
 })
 
-export const {setSuccess, setError, resetErrorSuccess, loginSuccess, possibleFrinedMatch, setFriends, setSearched, noSetSearched} = slice.actions
+export const {setSuccess, setError, resetErrorSuccess, loginSuccess, possibleFrinedMatch, setFriends, setSearched, noSetSearched,setManageAccount} = slice.actions
 export default slice.reducer
 
 export const createAccountAPI = (user) => apiCallBegan({
@@ -110,5 +114,20 @@ export const searchCurrentFriends = (firstandlast) => apiCallBegan({
     method: "GET",
     onSuccess: setSearched.type,
     onError: noSetSearched.type,
+})
+
+export const manageAccountAPI = () => apiCallBegan({
+    url: `http://localhost:8080/api/manageAccount`,
+    headers: {authorization: "Bearer: " + localStorage.getItem("token")},
+    method: "GET",
+    onSuccess: setManageAccount.type,
+    // onError: noSetSearched.type,
+})
+export const deleteUserAPI = () => apiCallBegan({
+    url: `http://localhost:8080/api/deleteUser`,
+    headers: {authorization: "Bearer: " + localStorage.getItem("token")},
+    method: "DELETE",
+    onSuccess: window.location.href = "/",
+    // onError: noSetSearched.type,
 })
 

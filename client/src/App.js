@@ -12,6 +12,7 @@ import Message from "./pages/Message"
 // import Test from "./components/Test"
 import Drawers from "./components/Drawer"
 import Upload from "./pages/Upload"
+import ManageAccount from "./pages/ManageAccount"
 
 
 
@@ -52,6 +53,9 @@ function App() {
           </Route>
           <Route exact path="/upload">
             <Upload />
+          </Route>
+          <Route exact path="/manageAccount">
+            <ManageAccount/>
           </Route>
           
         </Container>
