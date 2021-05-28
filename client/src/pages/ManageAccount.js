@@ -52,9 +52,11 @@ var widget = window.cloudinary.createUploadWidget({
 
 
                 <button type="click" id="upload_widget" onClick={handleImageUpload} >Change Photo</button>
-                <button type="click"  onClick={deleteUser} >Delete Account</button>
+                
 
             </form>
+
+            <button type="click"  onClick={deleteUser} >Delete Account</button>
             
         </div>
     )

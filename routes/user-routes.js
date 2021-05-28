@@ -297,7 +297,7 @@ router.delete("/api/deleteUser", async (req, res) => {
         }
       }).catch((err) => res.status(404).send("Validation Issue, unable to delete user at this time."));
      
-      res.status(200).json(userData)
+      res.status(200)
     } else {
       res.status(403).send("Session Expired");
     }
