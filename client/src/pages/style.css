@@ -146,3 +146,34 @@
   top: "200px" !important
 }
 
+/* Manage Account */
+
+.row{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  width: 100%;
+}
+
+.inputOne{
+  background-color: brown;
+  grid-column: span 4;
+ 
+  
+}
+.inputTwo{
+  background-color: burlywood;
+  grid-column: span 6;
+  
+
+}
+.inputThree{
+  background-color: chocolate;
+  grid-column: span 12;
+  
+}
+.inputFour{
+  background-color: cyan;
+  grid-column: span 4;
+  
+}
+
