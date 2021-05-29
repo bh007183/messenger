@@ -304,5 +304,44 @@ router.delete("/api/deleteUser", async (req, res) => {
   }
 });
 
+router.put("/api/updateUser", async (req, res) => {
+  let token = false;
+  if (!req.headers) {
+    token = false;
+  } else if (!req.headers.authorization) {
+    token = false;
+  } else {
+    token = req.headers.authorization.split(" ")[1];
+  }
+  if (!token) {
+    res.status(500).send("Please Login");
+  } else {
+    const data = await jwt.verify(token, process.env.JWS_TOKEN, (err, data) => {
+      if (err) {
+        res.status(403).send("Session Expired. Please Login").end();
+      } else {
+        return data;
+      }
+    });
+    if (data) {
+      let userData = await db.User.update({
+        firstandlast: req.body.firstandlast,
+        username: req.body.username,
+        email: req.body.email,
+        image: req.body.image
+      },
+        {
+        where: {
+          id: data.id,
+        }
+      }).catch((err) => res.status(404).send("Validation Issue, unable to delete user at this time."));
+     
+      res.status(200).json(userData)
+    } else {
+      res.status(403).send("Session Expired");
+    }
+  }
+});
+
 
 module.exports = router;
