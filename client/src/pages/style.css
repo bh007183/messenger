@@ -152,28 +152,44 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   width: 100%;
+  grid-gap: 20px;
 }
 
 .inputOne{
   background-color: brown;
-  grid-column: span 4;
+  grid-column: span 12;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
  
   
 }
 .inputTwo{
   background-color: burlywood;
   grid-column: span 6;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
   
-
 }
 .inputThree{
   background-color: chocolate;
   grid-column: span 12;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
   
 }
 .inputFour{
   background-color: cyan;
   grid-column: span 4;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
   
 }
 

@@ -7,11 +7,11 @@ export default function ManageAccount() {
   let userData = useSelector((state) => state.store.User.user);
 
   const [user, userState] = useState({
-    username: "",
-    name: "",
-    connections: "",
-    email: "",
-    image: "",
+    username: userData.username,
+    name: userData.name,
+    connections: userData.connections,
+    email: userData.email,
+    image: userData.image,
   });
 
   useEffect(() => {
@@ -37,34 +37,45 @@ export default function ManageAccount() {
   const deleteUser = (event) => {
     dispatch(deleteUserAPI());
   };
-
   return (
     <div className="formWraper">
       <form>
-        <div style={{ height: "52px" }}></div>
-
+        <div style={{ height: "51px" }}></div>
         <div className="row">
           <div className="inputOne">
-            <input value={userData.username} placeholder="Username"></input>
+            <input value={user.username} placeholder="Username"></input>
           </div>
         </div>
         <div className="row">
           <div className="inputTwo">
-            <input value={userData.firstandlast} placeholder="Name"></input>
+            <input value={user.firstandlast} placeholder="Name"></input>
           </div>
         </div>
         <div className="row">
           <div className="inputThree">
-            <input value={userData.email} placeholder="Email"></input>
+            <input value={user.email} placeholder="Email"></input>
           </div>
         </div>
-        <img src={user.image} />
-
-        <button type="click" id="upload_widget" onClick={handleImageUpload}>
-          Change Photo
-        </button>
+        <div className="row">
+          <div className="editimage">
+            <img src={user.image} />
+          </div>
+        </div>
+        <div className="row">
+          <div className="cloudinary">
+            <button type="click" id="upload_widget" onClick={handleImageUpload}>
+              Add/Change Photo
+            </button>
+          </div>
+        </div>
+        <div className="row">
+          <div className="submitChanges">
+            <button type="submit" >
+              Submit
+            </button>
+          </div>
+        </div>
       </form>
-
       <button type="click" onClick={deleteUser}>
         Delete Account
       </button>
