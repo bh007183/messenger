@@ -1,32 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { manageAccountAPI, deleteUserAPI, UpdateAccountAPI, userUpdateChangeHandler } from "../store/userActions";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import IconButton from "@material-ui/core/IconButton";
+import Fab from "@material-ui/core/Fab"
+import Button from "@material-ui/core/Button";
+import DeleteIcon from "@material-ui/icons/Delete";
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+
+import {
+  manageAccountAPI,
+  deleteUserAPI,
+  UpdateAccountAPI,
+  userUpdateChangeHandler,
+} from "../store/userActions";
 export default function ManageAccount() {
   const dispatch = useDispatch();
 
   let userData = useSelector((state) => state.store.User.user);
 
-  const [user, setUserState] = useState({
-    username: userData.username,
-    name: userData.name,
-    connections: userData.connections,
-    email: userData.email,
-    image: userData.image,
-  });
-
   useEffect(() => {
     dispatch(manageAccountAPI());
-    if(userData !== {}){
-      setUserState({
-        username: userData.username,
-        name: userData.name,
-        connections: userData.connections,
-        email: userData.email,
-        image: userData.image,
-        })
-
-    }
-    
   }, []);
 
   var widget = window.cloudinary.createUploadWidget(
@@ -36,8 +29,9 @@ export default function ManageAccount() {
     },
     (error, result) => {
       if (!error && result && result.event === "success") {
-        // setUserState({ ...user, image: result.info.url });
-        dispatch(userUpdateChangeHandler({name: "image", value: result.info.url}))
+        dispatch(
+          userUpdateChangeHandler({ name: "image", value: result.info.url })
+        );
       }
     }
   );
@@ -51,59 +45,105 @@ export default function ManageAccount() {
   };
 
   const handleSubmit = (event) => {
-    dispatch(UpdateAccountAPI(userData))
-  }
+    dispatch(UpdateAccountAPI(userData));
+  };
 
   const change = (event) => {
-
-    dispatch(userUpdateChangeHandler({name: event.target.name, value: event.target.value}))
-
-  }
-
-
+    dispatch(
+      userUpdateChangeHandler({
+        name: event.target.name,
+        value: event.target.value,
+      })
+    );
+  };
 
   return (
     <div className="formWraper">
       <form onSubmit={handleSubmit}>
-        <div style={{ height: "51px" }}></div>
-        <div className="row">
-          <div className="inputOne">
-            <input onChange={change} name="username" value={userData.username} placeholder="Username"></input>
-          </div>
-        </div>
-        <div className="row">
-          <div className="inputTwo">
-            <input onChange={change} value={userData.firstandlast} name="firstandlast" placeholder="Name"></input>
-          </div>
-        </div>
-        <div className="row">
-          <div className="inputThree">
-            <input onChange={change} value={userData.email} name="email" placeholder="Email"></input>
-          </div>
-        </div>
+        <div style={{ height: "50px" }}></div>
+
         <div className="row">
           <div className="editimage">
-            <img src={userData.image} />
+            <div
+              style={{
+                backgroundImage: `url(${userData.image})`,
+                backgroundSize: "contain",
+              }}
+              className="yourImage"
+            >
+              <Fab
+              
+                color="primary"
+                size="small"
+                className="cloudinary"
+                type="click"
+                id="upload_widget"
+                onClick={handleImageUpload}
+              >
+                <AddAPhotoIcon />
+              </Fab>
+            </div>
+          </div>
+          <div className="deleteButtonContain">
+            <Button
+              startIcon={<DeleteIcon />}
+              size="small"
+              variant="contained"
+              color="secondary"
+              type="click"
+              onClick={deleteUser}
+            >
+              Destroy
+            </Button>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="inputContain">
+            <label style={{ color: "white" }}>
+              Username:
+              <input
+                onChange={change}
+                name="username"
+                value={userData.username}
+                placeholder="Username"
+              ></input>
+            </label>
           </div>
         </div>
         <div className="row">
-          <div className="cloudinary">
-            <button type="click" id="upload_widget" onClick={handleImageUpload}>
-              Add/Change Photo
-            </button>
+          <div className="inputContain">
+            <label style={{ color: "white" }}>
+              Name:
+              <input
+                onChange={change}
+                value={userData.firstandlast}
+                name="firstandlast"
+                placeholder="Name"
+              ></input>
+            </label>
           </div>
         </div>
+        <div className="row">
+          <div className="inputContain">
+            <label style={{ color: "white" }}>
+              Email:
+              <input
+                onChange={change}
+                value={userData.email}
+                name="email"
+                placeholder="Email"
+              ></input>
+            </label>
+          </div>
+        </div>
+
         <div className="row">
           <div className="submitChanges">
-            <button type="submit" >
-              Submit
-            </button>
+            <button type="submit">Submit</button>
           </div>
         </div>
       </form>
-      <button type="click" onClick={deleteUser}>
-        Delete Account
-      </button>
     </div>
   );
 }

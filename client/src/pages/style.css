@@ -83,6 +83,7 @@
 
 
 
+
 .friendImageMessage{
   
   object-fit: cover;
@@ -148,48 +149,64 @@
 
 /* Manage Account */
 
+.formWraper{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  
+}
+
 .row{
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  width: 100%;
-  grid-gap: 20px;
+  width: 90%;
+
+  margin: 0 auto
 }
 
-.inputOne{
-  background-color: brown;
-  grid-column: span 12;
-  margin-top: 20px;
-  margin-bottom: 20px;
+.inputContain{
+  
+  grid-column: 6/8;
+  margin-top: 10px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: center;
- 
+}
+
+.editimage{
+  grid-column: 2/4;
+  margin-top: 20px;
+  margin-bottom: 20px;
   
 }
-.inputTwo{
-  background-color: burlywood;
-  grid-column: span 6;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
+.yourImage{
+  object-fit: cover;
+  height: unset;
+  aspect-ratio: 5 / 5;
+  background-position: center;
+  border-radius: 100%;
+  height: 120px;
+}
+
+.cloudinary{
+  position: relative;
+  left: 70px;
+  top: 95px;
+  
   
 }
-.inputThree{
-  background-color: chocolate;
-  grid-column: span 12;
-  margin-top: 20px;
-  margin-bottom: 20px;
+.deleteButtonContain{
+  grid-column: 11/12;
   display: flex;
   justify-content: center;
-  
-}
-.inputFour{
-  background-color: cyan;
-  grid-column: span 4;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
+  align-items: center;
   
 }
 
+.submitChanges{
+  grid-column: 6/8;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  
+}
