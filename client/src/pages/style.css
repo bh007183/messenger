@@ -179,6 +179,12 @@
   margin-bottom: 20px;
   
 }
+.AlertContain{
+  grid-column: 3/9;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  
+}
 .yourImage{
   object-fit: cover;
   height: unset;

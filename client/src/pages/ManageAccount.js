@@ -68,7 +68,10 @@ export default function ManageAccount() {
         <div style={{ height: "50px" }}></div>
 
         <div className="row">
+          <div className="AlertContain">
           <Alerts success={success} />
+
+          </div>
           <div className="editimage">
             <div
               style={{
