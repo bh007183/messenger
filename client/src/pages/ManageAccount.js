@@ -6,6 +6,8 @@ import Fab from "@material-ui/core/Fab"
 import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import Alerts from "../components/Alerts"
+import {Redirect} from "react-router-dom"
 
 import {
   manageAccountAPI,
@@ -17,6 +19,8 @@ export default function ManageAccount() {
   const dispatch = useDispatch();
 
   let userData = useSelector((state) => state.store.User.user);
+
+  const success = useSelector((state) => state.store.User.Success)
 
   useEffect(() => {
     dispatch(manageAccountAPI());
@@ -59,10 +63,12 @@ export default function ManageAccount() {
 
   return (
     <div className="formWraper">
-      <form onSubmit={handleSubmit}>
+      {userData ? (
+        <form onSubmit={handleSubmit}>
         <div style={{ height: "50px" }}></div>
 
         <div className="row">
+          <Alerts success={success} />
           <div className="editimage">
             <div
               style={{
@@ -144,6 +150,9 @@ export default function ManageAccount() {
           </div>
         </div>
       </form>
+
+      ) : <></>}
+      
     </div>
   );
 }

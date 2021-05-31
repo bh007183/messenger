@@ -60,14 +60,22 @@ const slice = createSlice({
 
         userUpdateChangeHandler: (User, action) => {
             User.user[action.payload.name] = action.payload.value
-        }
+        },
+
+        accountDestroySuccess: (User, action) => {
+            User.Success = action.payload
+            localStorage.clear()
+
+            
+        },
+
 
 
     }
 
 })
 
-export const {setSuccess, setError, resetErrorSuccess, loginSuccess, possibleFrinedMatch, setFriends, setSearched, noSetSearched,setManageAccount, userUpdateChangeHandler} = slice.actions
+export const {setSuccess, setError, resetErrorSuccess, loginSuccess, possibleFrinedMatch, setFriends, setSearched, noSetSearched,setManageAccount, userUpdateChangeHandler, accountDestroySuccess} = slice.actions
 export default slice.reducer
 
 export const createAccountAPI = (user) => apiCallBegan({
@@ -131,7 +139,7 @@ export const deleteUserAPI = () => apiCallBegan({
     url: `http://localhost:8080/api/deleteUser`,
     headers: {authorization: "Bearer: " + localStorage.getItem("token")},
     method: "DELETE",
-    onSuccess: window.location.href = "/",
+    onSuccess: accountDestroySuccess.type,
     // onError: noSetSearched.type,
 })
 export const UpdateAccountAPI = (data) => apiCallBegan({
