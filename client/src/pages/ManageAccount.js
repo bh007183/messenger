@@ -26,23 +26,28 @@ export default function ManageAccount() {
     dispatch(manageAccountAPI());
   }, []);
 
-  var widget = window.cloudinary.createUploadWidget(
-    {
-      cloudName: process.env.REACT_APP_COUDNAME,
-      uploadPreset: process.env.REACT_APP_COUDPRESET,
-    },
-    (error, result) => {
-      if (!error && result && result.event === "success") {
-        dispatch(
-          userUpdateChangeHandler({ name: "image", value: result.info.url })
-        );
+  const openWidget = () => {
+    window.cloudinary.createUploadWidget(
+      {
+        cloudName: process.env.REACT_APP_COUDNAME,
+        uploadPreset: process.env.REACT_APP_COUDPRESET,
+      },
+      (error, result) => {
+        if (!error && result && result.event === "success") {
+          dispatch(
+            userUpdateChangeHandler({ name: "image", value: result.info.url })
+          );
+        }
       }
-    }
-  );
+    ).open();
+
+  }
+
+  
 
   const handleImageUpload = (event) => {
     event.preventDefault();
-    widget.open();
+    openWidget();
   };
   const deleteUser = (event) => {
     dispatch(deleteUserAPI());

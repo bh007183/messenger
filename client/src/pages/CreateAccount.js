@@ -58,18 +58,23 @@ export default function CreateAccount() {
     }, 3000);
   }, [fail, success])
 
-  var widget = window.cloudinary.createUploadWidget({
-    cloudName: process.env.REACT_APP_COUDNAME,
-      uploadPreset: process.env.REACT_APP_COUDPRESET}, (error, result) => { 
-      if (!error && result && result.event === "success") { 
-        setLogin({ ...Login, image: result.info.url })
+  const openWidget = () => {
+    window.cloudinary.createUploadWidget({
+      cloudName: process.env.REACT_APP_COUDNAME,
+        uploadPreset: process.env.REACT_APP_COUDPRESET}, (error, result) => { 
+        if (!error && result && result.event === "success") { 
+          setLogin({ ...Login, image: result.info.url })
+        }
       }
-    }
-  )
+    ).open()
+
+  }
+
+  
   
   const handleImageUpload = (event) => {
     event.preventDefault()
-    widget.open()
+    openWidget()
   }
  
   

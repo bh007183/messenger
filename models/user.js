@@ -41,8 +41,8 @@ module.exports = function (sequelize, DataTypes) {
     });
     User.associate = function(models) {
         // User.hasMany(models.Conversation)
-        User.belongsToMany(models.Conversation, {through: "Join", constraints: false})
-        User.belongsToMany(User, {as: "Friends", through: "JoinFriend", constraints: false})
+        User.belongsToMany(models.Conversation, {through: "Join", constraints: true, onDelete: 'cascade', hooks: true})
+        User.belongsToMany(User, {as: "Friends", through: "JoinFriend", constraints: true, onDelete: 'cascade', hooks: true })
         
       };
     return User
