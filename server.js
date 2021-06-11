@@ -20,11 +20,11 @@ app.use(express.json());
 
 
 
-// var corsOptions = {
-//   origin: 'https://messenger-improved-bjh.herokuapp.com'
-// }
+var corsOptions = {
+  origin: 'https://messenger-improved-bjh.herokuapp.com'
+}
 // corsOptions
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Static directory
 
@@ -143,7 +143,6 @@ io.on("connection", async (socket) => {
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/client/build/index.html"));
-  console.log(__dirname, "../client/build/index.html");
 });
 // db.sequelize.query('SET FOREIGN_KEY_CHECKS = 0')
 // .then(function(){
